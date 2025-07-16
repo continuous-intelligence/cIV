@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+*.lcov
+.nyc_output
 
 # next.js
 /.next/
@@ -19,6 +21,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -32,6 +35,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
@@ -44,23 +51,131 @@ next-env.d.ts
 logs
 *.log
 dev-debug.log
-# Dependency directories
-node_modules/
-# Environment variables
-.env
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Cache directories
+.npm
+.eslintcache
+.stylelintcache
+.cache
+.parcel-cache
+.next/cache
+.swc/
+
+# Prettier
+.prettierignore
+
 # Editor directories and files
 .idea
-.vscode
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-# OS specific
 
-# Task files
-# tasks.json
-# tasks/ 
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Temporary folders
+tmp/
+temp/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env
+.env.development
+.env.test
+.env.production
+
+# Storybook build outputs
+storybook-static
+
+# Tailwind CSS
+/styles/globals.css.map
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Doppler CLI
+.doppler.yaml
+
+# Local development
+.local
+
+# Generated files
+generated/
+
+# Backup files
+*.bak
+*.tmp
+*.temp
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# IDE - JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk

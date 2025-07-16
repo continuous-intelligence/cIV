@@ -1,0 +1,251 @@
+# Task ID: 9
+# Title: Implement Real-time Content Preview
+# Status: pending
+# Dependencies: 4, 5, 6, 7
+# Priority: medium
+# Description: Set up real-time content preview functionality to allow content editors to see changes in Sanity Studio before publishing.
+# Details:
+1. Install required packages: `npm install @sanity/preview-kit next-sanity`
+2. Set up preview configuration in Sanity Studio
+3. Create preview-specific API routes in Next.js
+4. Implement PreviewProvider component:
+   ```typescript
+   // components/PreviewProvider.tsx
+   'use client'
+   
+   import { LiveQueryProvider } from '@sanity/preview-kit'
+   import { client } from '@/lib/sanity.client'
+   
+   export default function PreviewProvider({ children }) {
+     return (
+       <LiveQueryProvider client={client}>
+         {children}
+       </LiveQueryProvider>
+     )
+   }
+   ```
+5. Create preview-aware components that use both static and live data
+6. Add preview mode toggle in Sanity Studio
+7. Implement preview routing in Next.js
+8. Add visual indicator when in preview mode
+9. Configure proper authentication for preview routes
+
+# Test Strategy:
+1. Verify preview mode can be enabled from Sanity Studio
+2. Test that content changes in Sanity Studio appear in real-time in preview mode
+3. Verify preview mode is properly secured
+4. Test preview mode across different content types
+5. Verify preview indicator is visible when in preview mode
+
+# Subtasks:
+## 1. Configure Sanity Preview Setup [pending]
+### Dependencies: None
+### Description: Set up the necessary configuration in Sanity Studio to enable real-time preview functionality.
+### Details:
+1. Install required packages: `npm install @sanity/preview-kit next-sanity`
+2. Configure preview settings in `sanity.config.ts`:
+```typescript
+export default defineConfig({
+  // ... other config
+  preview: {
+    previewUrl: process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000',
+    previewSecret: process.env.SANITY_PREVIEW_SECRET,
+  },
+})
+```
+3. Add preview action to desk structure:
+```typescript
+export const getDefaultDocumentNode = (S) => {
+  return S.document().views([
+    S.view.form(),
+    S.view
+      .component(Iframe)
+      .options({
+        url: (doc) => resolvePreviewUrl(doc),
+      })
+      .title('Preview'),
+  ])
+}
+```
+4. Create a preview secret and store it in environment variables
+
+## 2. Implement Next.js Preview API Routes [pending]
+### Dependencies: 9.1
+### Description: Create the necessary API routes in Next.js to handle preview session management and authentication.
+### Details:
+1. Create API route for enabling preview mode:
+```typescript
+// app/api/preview/route.ts
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const secret = searchParams.get('secret')
+  const slug = searchParams.get('slug')
+  
+  if (secret !== process.env.SANITY_PREVIEW_SECRET) {
+    return new Response(JSON.stringify({ message: 'Invalid token' }), {
+      status: 401,
+    })
+  }
+  
+  const response = new Response(JSON.stringify({ preview: true }), {
+    status: 200,
+  })
+  
+  response.cookies.set('sanity-preview', 'true', {
+    maxAge: 60 * 60, // 1 hour
+    httpOnly: true,
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+  })
+  
+  return response
+}
+```
+2. Create API route for disabling preview mode:
+```typescript
+// app/api/exit-preview/route.ts
+export async function GET() {
+  const response = new Response(JSON.stringify({ preview: false }), {
+    status: 200,
+  })
+  
+  response.cookies.set('sanity-preview', '', {
+    maxAge: 0,
+    path: '/',
+  })
+  
+  return response
+}
+```
+3. Create utility function to check if preview mode is active
+
+## 3. Create PreviewProvider Component [pending]
+### Dependencies: 9.1, 9.2
+### Description: Implement the PreviewProvider component that will wrap the application and provide real-time updates from Sanity.
+### Details:
+1. Create the PreviewProvider component:
+```typescript
+// components/PreviewProvider.tsx
+'use client'
+
+import { LiveQueryProvider } from '@sanity/preview-kit'
+import { client } from '@/lib/sanity.client'
+
+export default function PreviewProvider({ 
+  children,
+  token,
+}: {
+  children: React.ReactNode
+  token: string
+}) {
+  if (!token) {
+    return <>{children}</>
+  }
+  
+  return (
+    <LiveQueryProvider client={client} token={token}>
+      {children}
+      <div className="fixed bottom-0 left-0 right-0 bg-black text-white p-2 text-center text-sm">
+        Preview Mode - <a href="/api/exit-preview" className="underline">Exit</a>
+      </div>
+    </LiveQueryProvider>
+  )
+}
+```
+2. Update the root layout to conditionally wrap with PreviewProvider:
+```typescript
+// app/layout.tsx
+import { draftMode } from 'next/headers'
+import { token } from '@/lib/sanity.fetch'
+import PreviewProvider from '@/components/PreviewProvider'
+
+export default function RootLayout({ children }) {
+  const { isEnabled } = draftMode()
+  const previewToken = isEnabled ? token : null
+  
+  return (
+    <html lang="en">
+      <body>
+        <PreviewProvider token={previewToken}>
+          {children}
+        </PreviewProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+## 4. Implement Preview-Aware Components [pending]
+### Dependencies: 9.3
+### Description: Update content components to be preview-aware, allowing them to display draft content when in preview mode.
+### Details:
+1. Create a utility function for preview-aware queries:
+```typescript
+// lib/sanity.fetch.ts
+import { draftMode } from 'next/headers'
+import { client } from './sanity.client'
+import { groq } from 'next-sanity'
+
+export const token = process.env.SANITY_API_READ_TOKEN
+
+export async function sanityFetch({
+  query,
+  params = {},
+  tags = [],
+}) {
+  const { isEnabled } = draftMode()
+  
+  if (isEnabled && !token) {
+    throw new Error('Missing preview token')
+  }
+  
+  return client.fetch(query, params, {
+    ...(isEnabled && token ? { token, perspective: 'previewDrafts' } : {}),
+    next: { tags },
+  })
+}
+```
+2. Update content components to use the preview-aware fetch:
+```typescript
+// app/blog/[slug]/page.tsx
+import { sanityFetch } from '@/lib/sanity.fetch'
+import { useParams } from 'next/navigation'
+import { PreviewSuspense, usePreviewSubscription } from '@sanity/preview-kit'
+
+export default async function BlogPost({ params }) {
+  const { slug } = params
+  const query = groq`*[_type == "post" && slug.current == $slug][0]`
+  const queryParams = { slug }
+  const post = await sanityFetch({ query, params: queryParams })
+  
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <div>{/* Render content */}</div>
+    </article>
+  )
+}
+```
+3. Create client-side preview components for real-time updates:
+```typescript
+// components/PreviewPost.tsx
+'use client'
+
+import { usePreviewSubscription } from '@sanity/preview-kit'
+
+export default function PreviewPost({ query, queryParams, initialData }) {
+  const { data } = usePreviewSubscription(query, {
+    params: queryParams,
+    initialData,
+  })
+  
+  return (
+    <article>
+      <h1>{data.title}</h1>
+      <div>{/* Render content */}</div>
+    </article>
+  )
+}
+```
+4. Test preview functionality across different content types
+

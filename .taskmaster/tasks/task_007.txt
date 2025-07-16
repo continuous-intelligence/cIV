@@ -1,0 +1,130 @@
+# Task ID: 7
+# Title: Implement Blog Page with Dynamic Content
+# Status: pending
+# Dependencies: 1, 4
+# Priority: high
+# Description: Develop the blog page that displays posts and micro-writing content from Sanity CMS with proper pagination and filtering.
+# Details:
+1. Create `/app/blog/page.tsx` for the blog listing page
+2. Create `/app/blog/[slug]/page.tsx` for individual blog posts
+3. Implement server components to fetch blog content from Sanity:
+   ```typescript
+   async function getBlogPosts(page = 1, limit = 10) {
+     const skip = (page - 1) * limit
+     return client.fetch(`{
+       "posts": *[_type == "post"] | order(publishedAt desc) [${skip}...${skip + limit}] {
+         title,
+         slug,
+         publishedAt,
+         excerpt,
+         "featuredImage": featuredImage.asset->url,
+         categories[]->
+       },
+       "total": count(*[_type == "post"])
+     }`)
+   }
+   
+   async function getPostBySlug(slug) {
+     return client.fetch(`*[_type == "post" && slug.current == $slug][0]{
+       title,
+       slug,
+       publishedAt,
+       body,
+       "featuredImage": featuredImage.asset->url,
+       categories[]->
+     }`, { slug })
+   }
+   ```
+4. Implement blog listing with pagination using `useSearchParams` for page tracking
+5. Create components for blog cards, pagination controls, and category filters
+6. Implement individual blog post page with rich text rendering using `@portabletext/react`
+7. Add syntax highlighting for code blocks using Prism.js or Highlight.js
+8. Implement responsive design for both listing and post pages
+9. Add "related posts" section to individual post pages
+10. Implement micro-writing section with shorter content pieces
+11. Add proper SEO metadata with Open Graph tags for sharing
+
+# Test Strategy:
+1. Verify blog listing page renders correctly with pagination
+2. Test individual blog post pages render correctly
+3. Verify rich text content renders properly including code blocks
+4. Test responsiveness across multiple device sizes
+5. Verify filtering by categories works correctly
+6. Test that content updates in Sanity reflect on the blog
+7. Verify SEO metadata is correctly generated for each post
+
+# Subtasks:
+## 1. Implement Blog Listing Page with Pagination [pending]
+### Dependencies: None
+### Description: Create the main blog listing page with pagination functionality to display blog posts in a paginated format.
+### Details:
+1. Create `/app/blog/page.tsx` as a server component
+2. Implement data fetching with pagination using Sanity client
+3. Create BlogCard component for post previews
+4. Implement pagination controls with proper state management
+5. Add loading states and error handling
+6. Write unit tests for pagination logic
+7. Implement responsive grid layout for different screen sizes
+
+## 2. Develop Individual Blog Post Page [pending]
+### Dependencies: 7.1
+### Description: Create the dynamic route and page for displaying individual blog posts with proper metadata and SEO.
+### Details:
+1. Create `/app/blog/[slug]/page.tsx` with dynamic routing
+2. Implement getPostBySlug function for data fetching
+3. Set up proper metadata using Next.js Metadata API
+4. Add structured data (JSON-LD) for SEO
+5. Implement social sharing functionality
+6. Create layout with featured image, title, date, and author info
+7. Add tests for post rendering and route handling
+
+## 3. Implement Rich Text Rendering with Portable Text [pending]
+### Dependencies: 7.2
+### Description: Set up the Portable Text renderer to properly display rich content from Sanity CMS including code blocks, images, and custom components.
+### Details:
+1. Install and configure @portabletext/react
+2. Create custom serializers for different content types
+3. Implement code block rendering with syntax highlighting
+4. Add image component with proper sizing and lazy loading
+5. Create custom components for callouts, quotes, and embeds
+6. Test rendering of complex content structures
+7. Ensure proper styling across all content types
+
+## 4. Implement Category Filtering System [pending]
+### Dependencies: 7.1
+### Description: Create a filtering system that allows users to filter blog posts by categories or tags.
+### Details:
+1. Create category data fetching function from Sanity
+2. Implement CategoryFilter component with selection UI
+3. Set up URL parameter handling for shareable filtered views
+4. Update blog listing query to support filtering
+5. Add clear filters functionality
+6. Implement proper state management for filter selections
+7. Test filter combinations and edge cases
+8. Ensure filters work with pagination
+
+## 5. Develop Related Posts Functionality [pending]
+### Dependencies: 7.2, 7.3, 7.4
+### Description: Implement a system to display related blog posts based on categories, tags, or other relevance criteria.
+### Details:
+1. Create getRelatedPosts query function using GROQ
+2. Implement RelatedPosts component to display at end of blog posts
+3. Define relevance algorithm based on shared categories and tags
+4. Add limit controls and sorting by relevance/date
+5. Create responsive card layout for related posts
+6. Test edge cases (no related posts, same post exclusion)
+7. Measure and optimize performance of related posts queries
+
+## 6. Create Micro-writing Section [pending]
+### Dependencies: 7.1
+### Description: Implement a dedicated section for micro-writing content with different styling and interaction patterns than full blog posts.
+### Details:
+1. Define Sanity schema for micro-writing content type
+2. Create data fetching function for micro-writing entries
+3. Implement MicroWritingSection component with distinct styling
+4. Add infinite scroll or load more functionality
+5. Create compact rendering for micro-writing entries
+6. Implement interaction patterns (likes, bookmarks)
+7. Test performance with large numbers of micro-writing entries
+8. Add filtering capabilities specific to micro-writing
+

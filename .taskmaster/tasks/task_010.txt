@@ -1,0 +1,251 @@
+# Task ID: 10
+# Title: Implement SEO and Performance Optimization
+# Status: pending
+# Dependencies: 5, 6, 7, 8
+# Priority: medium
+# Description: Optimize the website for search engines and performance, including metadata, Open Graph tags, and performance metrics.
+# Details:
+1. Implement dynamic metadata using Next.js Metadata API:
+   ```typescript
+   // app/blog/[slug]/page.tsx
+   export async function generateMetadata({ params }) {
+     const post = await getPostBySlug(params.slug)
+     return {
+       title: post.title,
+       description: post.excerpt,
+       openGraph: {
+         title: post.title,
+         description: post.excerpt,
+         images: [post.featuredImage],
+       },
+     }
+   }
+   ```
+2. Add structured data (JSON-LD) for rich search results
+3. Implement image optimization using Next.js Image component with proper sizing
+4. Set up font optimization using `next/font`
+5. Implement route prefetching for faster navigation
+6. Add proper caching headers for static assets
+7. Implement responsive images with srcset
+8. Configure Content Security Policy
+9. Add sitemap.xml and robots.txt generation
+10. Implement performance monitoring using Web Vitals
+11. Optimize Tailwind CSS for production using PurgeCSS
+
+# Test Strategy:
+1. Verify metadata is correctly generated for all pages
+2. Test structured data using Google's Rich Results Test
+3. Measure performance using Lighthouse and PageSpeed Insights
+4. Verify image optimization is working correctly
+5. Test Core Web Vitals metrics
+6. Verify sitemap.xml and robots.txt are correctly generated
+7. Test CSP headers are properly applied
+
+# Subtasks:
+## 1. Implement Metadata with Next.js API [pending]
+### Dependencies: None
+### Description: Set up dynamic metadata using Next.js Metadata API for all pages, including title, description, and basic Open Graph tags.
+### Details:
+1. Create a base metadata configuration in app/layout.tsx
+2. Implement dynamic metadata in page components using generateMetadata function
+3. Set up default and page-specific metadata templates
+4. Test metadata generation across different page types
+5. Implement conditional metadata based on content availability
+
+Code example:
+```typescript
+// app/layout.tsx
+export const metadata = {
+  title: {
+    default: 'Site Name',
+    template: '%s | Site Name'
+  },
+  description: 'Default site description'
+}
+
+// app/blog/[slug]/page.tsx
+export async function generateMetadata({ params }) {
+  const post = await getPostBySlug(params.slug)
+  return {
+    title: post.title,
+    description: post.excerpt || 'Read this blog post'
+  }
+}
+```
+
+## 2. Implement Structured Data and Open Graph Tags [pending]
+### Dependencies: 10.1
+### Description: Add comprehensive structured data (JSON-LD) and enhanced Open Graph tags for rich search results and social media sharing.
+### Details:
+1. Create JSON-LD schemas for different content types (articles, products, etc.)
+2. Implement comprehensive Open Graph tags including og:image, og:type, og:url
+3. Add Twitter card metadata
+4. Set up Facebook-specific Open Graph tags
+5. Implement schema.org markup for rich search results
+
+Code example:
+```typescript
+// components/JsonLd.tsx
+'use client'
+import { useEffect } from 'react'
+
+export function JsonLd({ data }) {
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.text = JSON.stringify(data)
+    document.head.appendChild(script)
+    return () => document.head.removeChild(script)
+  }, [data])
+  return null
+}
+
+// Usage in page component
+<JsonLd data={{
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': post.title,
+  'datePublished': post.publishedAt,
+  'author': {
+    '@type': 'Person',
+    'name': post.author.name
+  }
+}} />
+```
+
+## 3. Optimize Images and Fonts [pending]
+### Dependencies: 10.1
+### Description: Implement image and font optimization techniques to improve loading performance and Core Web Vitals.
+### Details:
+1. Configure Next.js Image component for all images
+2. Set up responsive image sizes and formats (WebP, AVIF)
+3. Implement lazy loading for below-the-fold images
+4. Configure font optimization with next/font
+5. Set up font preloading and display strategies
+
+Code example:
+```typescript
+// app/layout.tsx
+import { Inter, Roboto } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter'
+})
+
+const roboto = Roboto({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto'
+})
+
+// components/OptimizedImage.tsx
+import Image from 'next/image'
+
+export function OptimizedImage({ src, alt, ...props }) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={600}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      placeholder="blur"
+      blurDataURL="data:image/png;base64,..."
+      {...props}
+    />
+  )
+}
+```
+
+## 4. Implement Caching and Performance Headers [pending]
+### Dependencies: 10.1, 10.2, 10.3
+### Description: Set up caching strategies and performance-related HTTP headers to improve load times and Core Web Vitals.
+### Details:
+1. Configure caching headers for static assets
+2. Implement Content Security Policy headers
+3. Set up HTTP/2 Server Push for critical resources
+4. Configure service worker for offline capabilities
+5. Implement stale-while-revalidate caching strategy
+
+Code example:
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next()
+  
+  // Add security headers
+  response.headers.set('X-DNS-Prefetch-Control', 'on')
+  response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('X-Frame-Options', 'DENY')
+  
+  // Add caching headers for static assets
+  if (request.nextUrl.pathname.match(/\.(jpg|jpeg|png|webp|avif|css|js)$/)) {
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+  }
+  
+  return response
+}
+```
+
+## 5. Generate Sitemap and Robots.txt [pending]
+### Dependencies: 10.1, 10.2
+### Description: Create dynamic sitemap.xml and robots.txt files to improve search engine crawling and indexing.
+### Details:
+1. Set up dynamic sitemap.xml generation
+2. Configure robots.txt with appropriate rules
+3. Implement sitemap index for large sites
+4. Add changefreq and priority attributes to sitemap entries
+5. Test sitemap with Google Search Console
+
+Code example:
+```typescript
+// app/sitemap.ts
+import { MetadataRoute } from 'next'
+import { client } from '@/lib/sanity.client'
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://yourdomain.com'
+  
+  // Get all blog posts
+  const posts = await client.fetch(`*[_type == "post"]{ slug, _updatedAt }`)
+  
+  // Generate sitemap entries for posts
+  const postEntries = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug.current}`,
+    lastModified: new Date(post._updatedAt),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+  
+  // Add static pages
+  const staticPages = [
+    { url: baseUrl, lastModified: new Date(), priority: 1.0 },
+    { url: `${baseUrl}/about`, lastModified: new Date(), priority: 0.7 },
+    // Add other static pages
+  ]
+  
+  return [...staticPages, ...postEntries]
+}
+
+// app/robots.ts
+import { MetadataRoute } from 'next'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/api/', '/admin/'],
+    },
+    sitemap: 'https://yourdomain.com/sitemap.xml',
+  }
+}
+```
+

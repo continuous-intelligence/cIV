@@ -1,0 +1,368 @@
+# Task ID: 5
+# Title: Implement Splash Screen Page
+# Status: pending
+# Dependencies: 1, 4
+# Priority: medium
+# Description: Develop the splash screen page with dynamic content from Sanity CMS according to the provided design.
+# Details:
+1. Create `/app/page.tsx` as the splash screen
+2. Implement server component to fetch splash screen content from Sanity:
+   ```typescript
+   async function getSplashContent() {
+     return client.fetch(`*[_type == "splashScreen"][0]`)
+   }
+   ```
+3. Design splash screen according to provided design images using Tailwind CSS
+4. Implement animations for splash screen elements using Framer Motion (v10.16.0+)
+5. Add transition to landing page after splash screen display
+6. Ensure the page is fully responsive across all device sizes
+7. Implement SEO metadata using Next.js metadata API
+8. Add loading state while content is being fetched
+9. Implement error handling for failed content fetches
+
+# Test Strategy:
+1. Verify splash screen renders correctly with data from Sanity
+2. Test responsiveness across multiple device sizes
+3. Verify animations work as expected
+4. Test transition to landing page
+5. Verify loading states display correctly
+6. Test error handling by simulating a failed content fetch
+
+# Subtasks:
+## 1. Implement Server Component for Sanity Data Fetching [pending]
+### Dependencies: None
+### Description: Create a server component to fetch splash screen content from Sanity CMS and handle loading/error states.
+### Details:
+1. Create a utility function in `/lib/sanity.client.ts` to fetch splash screen data:
+```typescript
+export async function getSplashContent() {
+  try {
+    return await client.fetch(`*[_type == "splashScreen"][0]{
+      title,
+      subtitle,
+      backgroundImage,
+      logo,
+      animationDuration,
+      ctaText
+    }`)
+  } catch (error) {
+    console.error('Error fetching splash content:', error)
+    throw new Error('Failed to fetch splash screen content')
+  }
+}
+```
+
+2. Implement error handling and loading states in `/app/page.tsx`:
+```typescript
+import { getSplashContent } from '@/lib/sanity.client'
+import { Suspense } from 'react'
+import SplashLoading from '@/components/SplashLoading'
+import SplashScreen from '@/components/SplashScreen'
+
+export default async function Home() {
+  return (
+    <Suspense fallback={<SplashLoading />}>
+      <SplashContent />
+    </Suspense>
+  )
+}
+
+async function SplashContent() {
+  const splashData = await getSplashContent()
+  return <SplashScreen data={splashData} />
+}
+```
+
+3. Test the data fetching by:
+   - Verifying correct data structure is returned
+   - Testing error handling by temporarily breaking the query
+   - Checking loading state appears correctly during fetch
+
+## 2. Implement Splash Screen UI with Tailwind CSS [pending]
+### Dependencies: 5.1
+### Description: Design and implement the splash screen UI components according to the provided design using Tailwind CSS.
+### Details:
+1. Create a client component for the splash screen in `/components/SplashScreen.tsx`:
+```typescript
+'use client'
+
+import Image from 'next/image'
+import { urlForImage } from '@/lib/sanity.image'
+
+type SplashScreenProps = {
+  data: {
+    title: string
+    subtitle: string
+    backgroundImage: any
+    logo: any
+    animationDuration: number
+    ctaText: string
+  }
+}
+
+export default function SplashScreen({ data }: SplashScreenProps) {
+  return (
+    <div className="relative h-screen w-full overflow-hidden bg-black text-white">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0 z-0">
+        {data.backgroundImage && (
+          <Image
+            src={urlForImage(data.backgroundImage).url()}
+            alt="Background"
+            fill
+            priority
+            className="object-cover opacity-40"
+          />
+        )}
+      </div>
+      
+      {/* Content container */}
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center">
+        {/* Logo */}
+        {data.logo && (
+          <div className="mb-8 w-[180px] md:w-[240px]">
+            <Image
+              src={urlForImage(data.logo).url()}
+              alt="Logo"
+              width={240}
+              height={120}
+              priority
+              className="w-full"
+            />
+          </div>
+        )}
+        
+        {/* Title and subtitle */}
+        <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">{data.title}</h1>
+        <p className="mb-8 max-w-md text-lg md:text-xl">{data.subtitle}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+2. Create a loading component in `/components/SplashLoading.tsx`:
+```typescript
+export default function SplashLoading() {
+  return (
+    <div className="flex h-screen w-full items-center justify-center bg-black">
+      <div className="h-16 w-16 animate-spin rounded-full border-4 border-white border-t-transparent"></div>
+    </div>
+  )
+}
+```
+
+3. Test the UI implementation by:
+   - Checking responsiveness across different screen sizes
+   - Verifying image loading and fallbacks
+   - Testing with different content lengths from Sanity
+
+## 3. Implement Animations with Framer Motion [pending]
+### Dependencies: 5.2
+### Description: Add animations to splash screen elements using Framer Motion for a dynamic and engaging user experience.
+### Details:
+1. Install Framer Motion: `npm install framer-motion`
+
+2. Update the SplashScreen component with animations:
+```typescript
+'use client'
+
+import Image from 'next/image'
+import { urlForImage } from '@/lib/sanity.image'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+
+type SplashScreenProps = {
+  data: {
+    title: string
+    subtitle: string
+    backgroundImage: any
+    logo: any
+    animationDuration: number
+    ctaText: string
+  }
+}
+
+export default function SplashScreen({ data }: SplashScreenProps) {
+  const [isVisible, setIsVisible] = useState(true)
+  
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        when: "beforeChildren",
+        staggerChildren: 0.3,
+        duration: 0.8
+      }
+    },
+    exit: { 
+      opacity: 0,
+      transition: { 
+        when: "afterChildren",
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+        duration: 0.5
+      }
+    }
+  }
+  
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+    exit: { y: -20, opacity: 0, transition: { duration: 0.3 } }
+  }
+  
+  return (
+    <motion.div 
+      className="relative h-screen w-full overflow-hidden bg-black text-white"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      {/* Background image with overlay */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 0.4 }}
+        transition={{ duration: 1.5 }}
+      >
+        {data.backgroundImage && (
+          <Image
+            src={urlForImage(data.backgroundImage).url()}
+            alt="Background"
+            fill
+            priority
+            className="object-cover"
+          />
+        )}
+      </motion.div>
+      
+      {/* Content container */}
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center">
+        {/* Logo */}
+        {data.logo && (
+          <motion.div 
+            className="mb-8 w-[180px] md:w-[240px]"
+            variants={itemVariants}
+          >
+            <Image
+              src={urlForImage(data.logo).url()}
+              alt="Logo"
+              width={240}
+              height={120}
+              priority
+              className="w-full"
+            />
+          </motion.div>
+        )}
+        
+        {/* Title and subtitle */}
+        <motion.h1 
+          className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl"
+          variants={itemVariants}
+        >
+          {data.title}
+        </motion.h1>
+        <motion.p 
+          className="mb-8 max-w-md text-lg md:text-xl"
+          variants={itemVariants}
+        >
+          {data.subtitle}
+        </motion.p>
+      </div>
+    </motion.div>
+  )
+}
+```
+
+3. Test the animations by:
+   - Verifying smooth animation sequences
+   - Testing on different devices for performance
+   - Checking that animations respect reduced motion preferences
+
+## 4. Implement Page Transition and Responsive Design [pending]
+### Dependencies: 5.3
+### Description: Add transition from splash screen to landing page and ensure responsive design across all device sizes.
+### Details:
+1. Create a transition mechanism in `/app/page.tsx`:
+```typescript
+'use client'
+
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import SplashScreen from '@/components/SplashScreen'
+
+export default function Home({ splashData }) {
+  const router = useRouter()
+  const [showSplash, setShowSplash] = useState(true)
+  
+  useEffect(() => {
+    // Set timeout based on the duration from Sanity or default to 4000ms
+    const timer = setTimeout(() => {
+      setShowSplash(false)
+      // Short delay before navigation to allow exit animation to complete
+      setTimeout(() => {
+        router.push('/home')
+      }, 500)
+    }, splashData?.animationDuration || 4000)
+    
+    return () => clearTimeout(timer)
+  }, [])
+  
+  return (
+    <AnimatePresence mode="wait">
+      {showSplash && <SplashScreen data={splashData} />}
+    </AnimatePresence>
+  )
+}
+
+// Data fetching
+export async function getStaticProps() {
+  const splashData = await getSplashContent()
+  return { props: { splashData } }
+}
+```
+
+2. Add responsive design improvements:
+```css
+/* Add to globals.css or use in Tailwind classes */
+@media (max-width: 640px) {
+  .splash-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .splash-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .splash-title {
+    font-size: 3rem;
+  }
+}
+```
+
+3. Add skip functionality for users who don't want to wait:
+```typescript
+// Add to SplashScreen.tsx
+<motion.button
+  className="absolute bottom-8 text-sm opacity-70 hover:opacity-100 transition-opacity"
+  onClick={() => router.push('/home')}
+  variants={itemVariants}
+>
+  {data.ctaText || 'Skip'}
+</motion.button>
+```
+
+4. Test the transition by:
+   - Verifying smooth transition between splash and landing page
+   - Testing on different screen sizes and orientations
+   - Checking that skip functionality works correctly
+   - Verifying that the splash screen respects user preferences for reduced motion
+

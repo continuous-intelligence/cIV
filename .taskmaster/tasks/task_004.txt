@@ -1,0 +1,210 @@
+# Task ID: 4
+# Title: Set Up Sanity CMS Integration
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Initialize and configure Sanity CMS for content management with appropriate schemas for the website content.
+# Details:
+1. Install Sanity CLI: `npm install -g @sanity/cli`
+2. Initialize Sanity project: `npx sanity@latest init --template clean`
+3. Configure Sanity Studio with appropriate project ID and dataset
+4. Create schema types for all content types needed:
+   - Splash screen content
+   - Landing page sections (hero, features, about, etc.)
+   - Blog posts schema with fields for title, slug, publishedAt, body, excerpt, featured image
+   - Micro-writing content schema
+   - Navigation items
+   - Site settings (global content)
+5. Set up GROQ queries for content fetching
+6. Configure Sanity client in Next.js:
+   ```typescript
+   // lib/sanity.client.ts
+   import { createClient } from 'next-sanity'
+   
+   export const client = createClient({
+     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+     apiVersion: '2023-11-14', // Use current date
+     useCdn: process.env.NODE_ENV === 'production',
+   })
+   ```
+7. Set up environment variables for Sanity configuration
+8. Configure Sanity Studio deployment through GitHub Actions
+
+# Test Strategy:
+1. Verify Sanity Studio runs locally
+2. Test creating content in each schema type
+3. Verify GROQ queries return expected data
+4. Test Sanity client connection from Next.js
+5. Verify environment variables are correctly loaded
+
+# Subtasks:
+## 1. Initialize and Configure Sanity Project [pending]
+### Dependencies: None
+### Description: Set up a new Sanity project, install dependencies, and configure the basic project settings.
+### Details:
+1. Install Sanity CLI globally: `npm install -g @sanity/cli`
+2. Initialize a new Sanity project: `npx sanity@latest init --template clean`
+3. Configure project settings including project name, dataset name (development/production)
+4. Set up environment variables in a `.env.local` file:
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=development
+SANITY_API_TOKEN=your_api_token
+```
+5. Test the Sanity Studio locally with `npm run dev` in the Sanity project folder
+
+## 2. Develop Content Schemas for Sanity [pending]
+### Dependencies: 4.1
+### Description: Create schema definitions for all content types needed in the website.
+### Details:
+1. Create schema files in the `schemas` directory for each content type:
+   - Create `splashScreen.js` schema:
+   ```javascript
+   export default {
+     name: 'splashScreen',
+     title: 'Splash Screen',
+     type: 'document',
+     fields: [
+       {
+         name: 'title',
+         title: 'Title',
+         type: 'string',
+       },
+       {
+         name: 'backgroundImage',
+         title: 'Background Image',
+         type: 'image',
+         options: {
+           hotspot: true,
+         },
+       },
+       {
+         name: 'animationDuration',
+         title: 'Animation Duration (seconds)',
+         type: 'number',
+         validation: Rule => Rule.min(1).max(10),
+       }
+     ]
+   }
+   ```
+   - Create schemas for blog posts, landing page sections, navigation, and site settings
+2. Register all schemas in the `schema.js` file
+3. Test each schema by creating sample content in Sanity Studio
+
+## 3. Implement GROQ Queries for Content Fetching [pending]
+### Dependencies: 4.2
+### Description: Develop GROQ queries to fetch content from Sanity CMS for different parts of the website.
+### Details:
+1. Create a `lib/sanity.client.js` file to set up the Sanity client:
+```javascript
+import { createClient } from 'next-sanity'
+
+export const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: '2023-05-03',
+  useCdn: process.env.NODE_ENV === 'production',
+})
+```
+
+2. Create query functions for different content types:
+```javascript
+export async function getSplashScreen() {
+  return client.fetch(`*[_type == "splashScreen"][0]`)
+}
+
+export async function getHomePage() {
+  return client.fetch(`*[_type == "homePage"][0]{
+    title,
+    hero,
+    "sections": sections[]{
+      _type,
+      title,
+      content,
+      "image": image.asset->url
+    }
+  }`)
+}
+
+export async function getBlogPosts() {
+  return client.fetch(`*[_type == "post"] | order(publishedAt desc) {
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    "featuredImage": featuredImage.asset->url,
+    "categories": categories[]->title
+  }`)
+}
+```
+
+3. Test each query function to ensure it returns the expected data
+
+## 4. Set Up Next.js Client for Sanity Integration [pending]
+### Dependencies: 4.1, 4.3
+### Description: Configure Next.js to connect with Sanity CMS and implement content fetching in components.
+### Details:
+1. Install required packages: `npm install next-sanity @portabletext/react @sanity/image-url`
+
+2. Create a reusable hook for fetching Sanity data in `lib/hooks/useSanityData.ts`:
+```typescript
+import { useQuery } from '@tanstack/react-query'
+import { client } from '../sanity.client'
+
+export function useSanityData<T>(query: string) {
+  return useQuery<T>({
+    queryKey: ['sanity', query],
+    queryFn: () => client.fetch(query),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  })
+}
+```
+
+3. Implement server components for fetching data:
+```typescript
+// app/page.tsx
+import { getSplashScreen } from '@/lib/sanity.client'
+import SplashScreen from '@/components/SplashScreen'
+
+export default async function Home() {
+  const splashData = await getSplashScreen()
+  
+  return <SplashScreen data={splashData} />
+}
+```
+
+4. Test the integration by displaying Sanity content in Next.js components
+
+## 5. Deploy and Configure Sanity Studio [pending]
+### Dependencies: 4.1, 4.2
+### Description: Set up Sanity Studio deployment and configure CORS settings for production use.
+### Details:
+1. Configure CORS origins in Sanity management console to allow your Next.js app domains
+
+2. Set up Sanity Studio deployment:
+```bash
+sanity deploy
+```
+
+3. Configure authentication and access controls for Sanity Studio:
+   - Set up user roles and permissions in Sanity management console
+   - Configure API access tokens with appropriate permissions
+
+4. Add Sanity Studio as a route in Next.js app:
+   - Create `app/studio/[[...index]]/page.tsx`:
+```typescript
+'use client'
+
+import { NextStudio } from 'next-sanity/studio'
+import config from '@/sanity.config'
+
+export default function StudioPage() {
+  return <NextStudio config={config} />
+}
+```
+
+5. Test the deployed Studio and verify it can be accessed from the Next.js app at `/studio`
+
+6. Document the deployment process and access controls for team members
+

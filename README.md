@@ -1,93 +1,79 @@
-# 🚀 cIV - Dynamic Product Website
+# 🚀 cIV - Modern Product Website
 
 [![Build Status](https://github.com/continuous-intelligence/cIV/workflows/CI/badge.svg)](https://github.com/continuous-intelligence/cIV/actions)
-[![License](https://img.shields.io/badge/license-Proprietary-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/continuous-intelligence/cIV/releases)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.0+-black.svg)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0+-38B2AC.svg)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
-**A modern, dynamic single-page product website built with cutting-edge technologies to deliver exceptional user experiences with seamless content management capabilities.**
+**cIV** is a modern, dynamic single-page product website **currently in early development**. The project is being built with cutting-edge technologies to deliver exceptional user experiences with seamless content management capabilities.
 
-## 🌟 Project Overview
+> **⚠️ Development Status**: This project is in the **foundation phase**. Core setup is complete, but main features (Sanity CMS, custom pages, etc.) are not yet implemented.
 
-cIV is a comprehensive single-page application designed to showcase product information through three beautifully crafted sections:
+## 📋 Project Overview
 
-- **🎯 Splash Screen** - Engaging entry point with dynamic branding
-- **🏠 Landing Page** - Feature-rich product showcase with dynamic sections
-- **📝 Blog Page** - Content hub supporting both blog posts and micro-writing
+A comprehensive single-page application that will showcase product information through:
 
-## ✨ Key Features
+- **🎯 Splash Screen** - Engaging entry point with dynamic branding _(Planned)_
+- **🏠 Landing Page** - Feature-rich product showcase _(Planned)_
+- **📝 Blog Page** - Content hub with dynamic posts _(Planned)_
 
-### 🎨 **Modern UI/UX**
-- Responsive design optimized for all device sizes
-- Beautiful, accessible interface using Shadcn UI components
-- Smooth animations and transitions
-- Modern typography and color schemes
+## 🛠️ Tech Stack
 
-### 🔧 **Content Management**
-- **Fully Dynamic Content** - All website content manageable through Sanity CMS
-- **Real-time Updates** - Content changes reflect instantly without code modifications
-- **Rich Media Support** - Optimized image handling and rich text editing
-- **Preview Mode** - Live content preview for editors
+### **Current Implementation**
 
-### 🚀 **Performance & SEO**
-- **Static Site Generation** - Lightning-fast loading times
-- **Image Optimization** - Automatic image compression and responsive images
-- **SEO Optimized** - Dynamic meta tags and structured data
-- **Progressive Web App** - App-like experience with offline capabilities
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Router ✅
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development ✅
+- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first styling ✅
+- **[Shadcn UI](https://ui.shadcn.com/)** - Component library foundation ✅
+- **[Sentry](https://sentry.io/)** - Error monitoring ✅
 
-### 🔒 **Enterprise-Grade Development**
-- **Type Safety** - Full TypeScript implementation
-- **Code Quality** - ESLint, Prettier, and automated testing
-- **CI/CD Pipeline** - Automated deployment and quality checks
-- **Branch Protection** - Secure development workflow
+### **Planned Integrations**
 
-## 🛠️ Technology Stack
-
-### **Frontend**
-- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Shadcn UI](https://ui.shadcn.com/)** - Beautiful, accessible components
-
-### **Backend & CMS**
-- **[Sanity CMS](https://www.sanity.io/)** - Headless content management
-- **[Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)** - Server-side functionality
-- **[GROQ](https://www.sanity.io/docs/groq)** - Graph-Relational Object Queries
+- **[Sanity CMS](https://www.sanity.io/)** - Headless content management ⏳
+- **[Framer Motion](https://www.framer.com/motion/)** - Smooth animations ⏳
+- **[GROQ](https://www.sanity.io/docs/groq)** - Graph-Relational Object Queries ⏳
 
 ### **Development & Deployment**
-- **[Vercel](https://vercel.com/)** - Deployment and hosting
-- **[GitHub Actions](https://github.com/features/actions)** - CI/CD pipeline
-- **[Doppler](https://www.doppler.com/)** - Environment management
-- **[Sentry](https://sentry.io/)** - Error monitoring
 
-## 🎯 Project Status
+- **[GitHub Actions](https://github.com/features/actions)** - CI/CD pipeline ✅
+- **[Vercel](https://vercel.com/)** - Production deployment ⏳
+- **[Doppler](https://doppler.com/)** - Environment management ⏳
 
-| Feature | Status |
-|---------|--------|
-| **Next.js Setup** | ✅ Complete |
-| **Git Repository** | ✅ Complete |
-| **Sanity CMS Integration** | 🔄 In Progress |
-| **Splash Screen** | ⏳ Pending |
-| **Landing Page** | ⏳ Pending |
-| **Blog Page** | ⏳ Pending |
-| **Real-time Preview** | ⏳ Pending |
-| **GitHub Actions CI/CD** | ⏳ Pending |
-| **Production Deployment** | ⏳ Pending |
+## 🚧 Current Status
+
+| Feature                    | Status         | Notes                              |
+| -------------------------- | -------------- | ---------------------------------- |
+| **Next.js Setup**          | ✅ Complete    | App Router, TypeScript, ESLint     |
+| **Tailwind CSS**           | ✅ Complete    | v4 configured with proper setup    |
+| **Shadcn UI**              | ✅ Basic Setup | Button component only              |
+| **Git Repository**         | ✅ Complete    | Branch protection, CI/CD workflows |
+| **GitHub Actions CI/CD**   | ✅ Complete    | Quality checks, build workflows    |
+| **Sentry Integration**     | ✅ Complete    | Error tracking configured          |
+| **Sanity CMS Integration** | ⏳ Not Started | No CMS setup or content schemas    |
+| **Splash Screen**          | ⏳ Not Started | Still showing default Next.js page |
+| **Landing Page**           | ⏳ Not Started | No custom page implementation      |
+| **Blog Page**              | ⏳ Not Started | No blog functionality              |
+| **Real-time Preview**      | ⏳ Not Started | Depends on Sanity integration      |
+| **Production Deployment**  | ⏳ Not Started | No live site yet                   |
 
 ## 📚 Documentation
 
 Comprehensive documentation is available in our **[GitHub Wiki](https://github.com/continuous-intelligence/cIV/wiki)**:
 
 ### 🚀 **Getting Started**
+
 - **[Setup Instructions](https://github.com/continuous-intelligence/cIV/wiki/Setup-Instructions)** - Complete development environment setup
 - **[Architecture](https://github.com/continuous-intelligence/cIV/wiki/Architecture)** - Technical architecture and design decisions
-- **[Git Workflow](https://github.com/continuous-intelligence/cIV/wiki/Git-Workflow)** - Development workflow and branching strategy
 
 ### 🔧 **Development**
+
 - **[Component Library](https://github.com/continuous-intelligence/cIV/wiki/Component-Library)** - UI components and patterns
 - **[API Documentation](https://github.com/continuous-intelligence/cIV/wiki/API-Documentation)** - Backend API reference
 - **[Testing](https://github.com/continuous-intelligence/cIV/wiki/Testing)** - Testing strategies and guidelines
 
 ### 🚀 **Deployment**
+
 - **[Deployment Guide](https://github.com/continuous-intelligence/cIV/wiki/Deployment)** - Production deployment process
 - **[Environment Management](https://github.com/continuous-intelligence/cIV/wiki/Environment-Management)** - Environment setup and configuration
 - **[Monitoring](https://github.com/continuous-intelligence/cIV/wiki/Monitoring)** - Performance and error tracking
@@ -117,6 +103,7 @@ We follow a structured three-branch development model:
 - **`development`** - Active development
 
 ### Contributing
+
 1. Fork the repository
 2. Create a feature branch from `development`
 3. Make your changes with tests
@@ -149,11 +136,11 @@ Our repository uses **GitHub Actions** for continuous integration and deployment
 
 ### Branch Protection Rules
 
-| Branch | Status Checks Required | Review Requirements | Direct Push |
-|--------|----------------------|-------------------|-------------|
-| `development` | None | None | ✅ Allowed |
-| `staging` | All CI checks | 1 reviewer | ❌ Blocked |
-| `main` | CI + Staging deployment | 2 reviewers | ❌ Blocked |
+| Branch        | Status Checks Required  | Review Requirements | Direct Push |
+| ------------- | ----------------------- | ------------------- | ----------- |
+| `development` | None                    | None                | ✅ Allowed  |
+| `staging`     | All CI checks           | 1 reviewer          | ❌ Blocked  |
+| `main`        | CI + Staging deployment | 2 reviewers         | ❌ Blocked  |
 
 ### Development Workflow
 
@@ -164,21 +151,22 @@ graph LR
     C --> D[Code Review]
     D --> E[Staging]
     E --> F[Production]
-    
+
     style A fill:#e1f5fe,stroke:#0288d1
     style E fill:#f3e5f5,stroke:#7b1fa2
     style F fill:#e8f5e8,stroke:#388e3c
 ```
 
 **Setup Instructions:**
+
 - **[Branch Protection Setup](docs/branch-protection-setup.md)** - Configure GitHub branch protection rules
 - **[GitHub Actions Secrets](docs/github-actions-secrets.md)** - Set up deployment credentials
 
 ## 🔗 Links
 
-- **[Live Site](https://civ.app)** - Production website *(when deployed)*
-- **[Staging Site](https://staging.civ.app)** - Pre-production testing *(when deployed)*
-- **[Sanity Studio](https://civ-studio.sanity.studio)** - Content management *(when configured)*
+- **[Live Site](https://civ.app)** - Production website _(when deployed)_
+- **[Staging Site](https://staging.civ.app)** - Pre-production testing _(when deployed)_
+- **[Sanity Studio](https://civ-studio.sanity.studio)** - Content management _(when configured)_
 - **[GitHub Wiki](https://github.com/continuous-intelligence/cIV/wiki)** - Complete documentation
 
 ## 🤝 Support

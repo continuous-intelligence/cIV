@@ -24,9 +24,7 @@
             "id": 2,
             "title": "Configure Tailwind CSS",
             "description": "Install and configure Tailwind CSS with the Next.js project",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Install Tailwind CSS and its dependencies:\n   ```bash\n   npm install -D tailwindcss postcss autoprefixer\n   npx tailwindcss init -p\n   ```\n2. Update the `tailwind.config.js` file to include the paths to your template files:\n   ```javascript\n   /** @type {import('tailwindcss').Config} */\n   module.exports = {\n     content: [\n       './src/pages/**/*.{js,ts,jsx,tsx,mdx}',\n       './src/components/**/*.{js,ts,jsx,tsx,mdx}',\n       './src/app/**/*.{js,ts,jsx,tsx,mdx}',\n     ],\n     theme: {\n       extend: {},\n     },\n     plugins: [],\n   }\n   ```\n3. Add the Tailwind directives to your CSS by creating or updating `src/app/globals.css`:\n   ```css\n   @tailwind base;\n   @tailwind components;\n   @tailwind utilities;\n   ```\n4. Verify the setup by adding Tailwind classes to a component and checking if they apply correctly",
             "status": "done",
             "testStrategy": ""
@@ -35,10 +33,7 @@
             "id": 3,
             "title": "Integrate Shadcn UI",
             "description": "Install and configure Shadcn UI component library with the Next.js project",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Add the Shadcn UI CLI to your project:\n   ```bash\n   npm install -D @shadcn/ui\n   ```\n2. Initialize Shadcn UI in your project:\n   ```bash\n   npx shadcn-ui@latest init\n   ```\n3. During initialization, select the following options:\n   - Would you like to use TypeScript? › Yes\n   - Which style would you like to use? › Default\n   - Which color would you like to use as base color? › Slate\n   - Where is your global CSS file? › src/app/globals.css\n   - Do you want to use CSS variables? › Yes\n   - Where is your tailwind.config.js located? › tailwind.config.js\n   - Configure the import alias for components? › @/components\n   - Configure the import alias for utils? › @/lib/utils\n4. Add a component to test the setup:\n   ```bash\n   npx shadcn-ui@latest add button\n   ```\n5. Use the button component in your app page to verify it works correctly",
             "status": "done",
             "testStrategy": ""
@@ -47,11 +42,7 @@
             "id": 4,
             "title": "Organize project structure",
             "description": "Set up a well-organized folder structure for the Next.js project",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "1. Create the following directory structure in your project:\n   ```\n   src/\n     app/\n       (routes)/\n         page.tsx\n         layout.tsx\n       globals.css\n     components/\n       ui/          # For shadcn components\n       layout/      # Layout components like Header, Footer\n       features/    # Feature-specific components\n     lib/\n       utils.ts     # Utility functions\n     hooks/         # Custom React hooks\n     types/         # TypeScript type definitions\n     styles/        # Additional styles beyond globals.css\n     config/        # App configuration\n   public/\n     images/\n     fonts/\n   ```\n2. Create placeholder files in each directory to maintain the structure\n3. Update import paths in existing files to match the new structure\n4. Create a basic layout component in `src/components/layout/Layout.tsx`\n5. Update `src/app/layout.tsx` to use the new layout component\n6. Verify the structure works by running the development server",
             "status": "done",
             "testStrategy": ""
@@ -60,12 +51,7 @@
             "id": 5,
             "title": "Configure Git and package settings",
             "description": "Set up Git repository and configure package.json with appropriate scripts and dependencies",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "dependencies": [1, 2, 3, 4],
             "details": "1. Initialize Git repository:\n   ```bash\n   git init\n   ```\n2. Create a `.gitignore` file with appropriate entries:\n   ```\n   # dependencies\n   node_modules\n   .pnp\n   .pnp.js\n\n   # testing\n   coverage\n\n   # next.js\n   .next/\n   out/\n\n   # production\n   build\n\n   # misc\n   .DS_Store\n   *.pem\n\n   # debug\n   npm-debug.log*\n   yarn-debug.log*\n   yarn-error.log*\n\n   # local env files\n   .env*.local\n\n   # vercel\n   .vercel\n\n   # typescript\n   *.tsbuildinfo\n   next-env.d.ts\n   ```\n3. Update `package.json` with additional scripts:\n   ```json\n   \"scripts\": {\n     \"dev\": \"next dev\",\n     \"build\": \"next build\",\n     \"start\": \"next start\",\n     \"lint\": \"next lint\",\n     \"format\": \"prettier --write .\"\n   }\n   ```\n4. Install development dependencies:\n   ```bash\n   npm install -D prettier eslint-config-prettier\n   ```\n5. Create a `.prettierrc` file with your preferred formatting options\n6. Make an initial commit:\n   ```bash\n   git add .\n   git commit -m \"Initial project setup\"\n   ```\n7. Create a README.md file with project setup instructions and available scripts",
             "status": "done",
             "testStrategy": ""
@@ -79,9 +65,7 @@
         "details": "1. Initialize Git repository: `git init`\n2. Create initial commit with basic project structure\n3. Create the three required branches:\n   - `main` (production)\n   - `staging` (staging environment)\n   - `development` (active development)\n4. Push to GitHub repository\n5. Configure branch protection rules for `main` and `staging` branches:\n   - Require pull request reviews before merging\n   - Require status checks to pass before merging\n   - Dismiss stale pull request approvals when new commits are pushed\n   - Require branches to be up to date before merging\n   - Include administrators in restrictions\n   - Prevent force pushes and deletions\n6. Create documentation in README.md explaining the Git workflow:\n   - Feature branch creation from `development`\n   - PR process\n   - Branch promotion workflow",
         "testStrategy": "1. Verify all three branches exist in the repository\n2. Attempt to push directly to protected branches and confirm it's blocked\n3. Create a test PR and verify protection rules are enforced\n4. Verify documentation accurately reflects the implemented workflow",
         "priority": "high",
-        "dependencies": [
-          1
-        ],
+        "dependencies": [1],
         "status": "done",
         "subtasks": [
           {
@@ -97,9 +81,7 @@
             "id": 2,
             "title": "Create GitHub Repository and Push Code",
             "description": "Create a new GitHub repository and push the local repository with all branches",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Log in to GitHub account\n2. Click '+ New repository' button in the top-right corner\n3. Enter repository name and description\n4. Keep repository public or private as required\n5. Do NOT initialize with README, .gitignore, or license\n6. Click 'Create repository'\n7. Copy the repository URL\n8. In terminal, add the remote: `git remote add origin [repository-url]`\n9. Push all branches:\n   - `git checkout main && git push -u origin main`\n   - `git checkout staging && git push -u origin staging`\n   - `git checkout development && git push -u origin development`\n10. Verify all branches appear in GitHub repository",
             "status": "done",
             "testStrategy": ""
@@ -108,9 +90,7 @@
             "id": 3,
             "title": "Configure Branch Protection Rules",
             "description": "Set up GitHub branch protection rules for main and staging branches",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "1. Navigate to the repository on GitHub\n2. Go to 'Settings' tab\n3. Select 'Branches' from the left sidebar\n4. Under 'Branch protection rules', click 'Add rule'\n5. For 'main' branch:\n   - Enter 'main' in the branch name pattern\n   - Check 'Require pull request reviews before merging'\n   - Set required approvals to at least 1\n   - Check 'Dismiss stale pull request approvals when new commits are pushed'\n   - Check 'Require status checks to pass before merging'\n   - Check 'Require branches to be up to date before merging'\n   - Save changes\n6. Repeat steps 4-5 for 'staging' branch\n7. Test protection by attempting to push directly to protected branches\n8. Create a test PR to verify protection rules are enforced",
             "status": "done",
             "testStrategy": ""
@@ -124,9 +104,7 @@
         "details": "1. Create `.github/workflows` directory\n2. Create `ci.yml` workflow file for development branch checks:\n   - Configure workflow to run on pushes to `development` branch\n   - Add job for ESLint using `eslint .` with appropriate configuration\n   - Add job for TypeScript type checking using `tsc --noEmit`\n   - Add job for Prettier formatting check using `prettier --check .`\n   - Add job for build verification using `next build`\n   - Add job for bundle size analysis using `@next/bundle-analyzer`\n3. Create `staging-deploy.yml` for staging deployments\n4. Create `production-deploy.yml` for production deployments\n5. Configure workflows to use GitHub Secrets for any sensitive information\n6. Set up status checks to be required for PRs to protected branches",
         "testStrategy": "1. Push a commit to the development branch and verify all CI checks run\n2. Introduce a linting error and verify the workflow fails\n3. Introduce a TypeScript error and verify the workflow fails\n4. Fix all issues and verify the workflow passes\n5. Verify status checks appear on PRs to protected branches",
         "priority": "high",
-        "dependencies": [
-          2
-        ],
+        "dependencies": [2],
         "status": "done",
         "subtasks": [
           {
@@ -142,9 +120,7 @@
             "id": 2,
             "title": "Staging Deployment Workflow Setup",
             "description": "Create and configure the workflow for automated deployments to the staging environment when changes are merged to the staging branch.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create `.github/workflows/staging-deploy.yml` file\n2. Configure workflow to run on pushes to `staging` branch\n3. Set up jobs for:\n   - Running tests\n   - Building the application\n   - Deploying to staging environment (e.g., Vercel)\n4. Configure environment secrets management\n5. Example YAML configuration:\n```yaml\nname: Staging Deployment\n\non:\n  push:\n    branches: [ staging ]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - uses: actions/setup-node@v3\n        with:\n          node-version: '18'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm test\n\n  deploy:\n    needs: test\n    runs-on: ubuntu-latest\n    environment: staging\n    steps:\n      - uses: actions/checkout@v3\n      - uses: actions/setup-node@v3\n        with:\n          node-version: '18'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm run build\n      - name: Deploy to Vercel\n        uses: amondnet/vercel-action@v20\n        with:\n          vercel-token: ${{ secrets.VERCEL_TOKEN }}\n          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}\n          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}\n          vercel-args: '--prod'\n```\n6. Document required secrets in repository settings\n7. Test by merging a PR to staging branch and verifying deployment",
             "status": "done",
             "testStrategy": ""
@@ -153,10 +129,7 @@
             "id": 3,
             "title": "Production Deployment Workflow Setup",
             "description": "Create and configure the workflow for automated deployments to the production environment when changes are merged to the main branch.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Create `.github/workflows/production-deploy.yml` file\n2. Configure workflow to run on pushes to `main` branch\n3. Set up jobs for:\n   - Running tests\n   - Building the application\n   - Deploying to production environment\n   - Adding version tags\n4. Configure production-specific environment variables and secrets\n5. Example YAML configuration:\n```yaml\nname: Production Deployment\n\non:\n  push:\n    branches: [ main ]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - uses: actions/setup-node@v3\n        with:\n          node-version: '18'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm test\n\n  deploy:\n    needs: test\n    runs-on: ubuntu-latest\n    environment: production\n    steps:\n      - uses: actions/checkout@v3\n      - uses: actions/setup-node@v3\n        with:\n          node-version: '18'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm run build\n      - name: Deploy to Vercel\n        uses: amondnet/vercel-action@v20\n        with:\n          vercel-token: ${{ secrets.VERCEL_TOKEN }}\n          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}\n          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}\n          vercel-args: '--prod'\n      - name: Create Release Tag\n        uses: actions/create-release@v1\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n        with:\n          tag_name: v${{ github.run_number }}\n          release_name: Release v${{ github.run_number }}\n          draft: false\n          prerelease: false\n```\n6. Document production deployment verification steps\n7. Test by merging a PR to main branch and verifying deployment\n<info added on 2025-07-17T06:33:30.684Z>\nTASK STATUS UPDATE: SKIPPING PRODUCTION DEPLOYMENT WORKFLOW\n\nREASONING: Vercel provides native GitHub integration with automatic deployments:\n- Automatically deploys on pushes to main branch\n- Handles build process natively\n- Provides deployment URLs and status updates\n- Manages environment variables through Vercel dashboard\n- Creating custom GitHub Actions for production deployment would be redundant and potentially conflicting\n\nRECOMMENDATION: Use Vercel's native deployment system instead of custom GitHub Actions for production deployments.\n\nCONFIGURATION: Connect GitHub repository to Vercel project and configure automatic deployments through Vercel dashboard.\n\nALTERNATIVE IMPLEMENTATION:\n1. Log into Vercel dashboard and connect GitHub repository\n2. Configure automatic deployments for main branch\n3. Set up environment variables in Vercel project settings\n4. Configure build settings if needed (typically auto-detected for Next.js)\n5. Verify deployment triggers on main branch pushes\n6. Document Vercel deployment process for team reference\n\nThis approach eliminates the need for custom GitHub Actions production deployment workflow while maintaining automated deployment functionality.\n</info added on 2025-07-17T06:33:30.684Z>",
             "status": "done",
             "testStrategy": ""
@@ -165,11 +138,7 @@
             "id": 4,
             "title": "Status Checks Integration with Branch Protection",
             "description": "Configure GitHub branch protection rules to require status checks from CI/CD workflows before allowing merges to protected branches.",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "1. Update branch protection rules for `staging` and `main` branches\n2. Configure required status checks:\n   - For `staging` branch: require all CI checks from development workflow\n   - For `main` branch: require all CI checks and successful staging deployment\n3. Configure branch protection settings:\n   - Require pull request reviews before merging\n   - Dismiss stale pull request approvals when new commits are pushed\n   - Require status checks to pass before merging\n   - Restrict who can push to matching branches\n4. Document branch protection configuration in project README\n5. Testing procedure:\n   - Create a PR to staging branch with failing tests and verify it cannot be merged\n   - Create a PR to staging branch with passing tests and verify it can be merged\n   - Create a PR to main branch and verify it requires staging deployment success\n   - Verify direct pushes to protected branches are blocked\n6. Create documentation for team members explaining the workflow and protection rules",
             "status": "done",
             "testStrategy": ""
@@ -183,9 +152,7 @@
         "details": "1. Install Sanity CLI: `npm install -g @sanity/cli`\n2. Initialize Sanity project: `npx sanity@latest init --template clean`\n3. Configure Sanity Studio with appropriate project ID and dataset\n4. Create schema types for all content types needed:\n   - Splash screen content\n   - Landing page sections (hero, features, about, etc.)\n   - Blog posts schema with fields for title, slug, publishedAt, body, excerpt, featured image\n   - Micro-writing content schema\n   - Navigation items\n   - Site settings (global content)\n5. Set up GROQ queries for content fetching\n6. Configure Sanity client in Next.js:\n   ```typescript\n   // lib/sanity.client.ts\n   import { createClient } from 'next-sanity'\n   \n   export const client = createClient({\n     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,\n     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',\n     apiVersion: '2023-11-14', // Use current date\n     useCdn: process.env.NODE_ENV === 'production',\n   })\n   ```\n7. Set up environment variables for Sanity configuration\n8. Configure Sanity Studio deployment through GitHub Actions",
         "testStrategy": "1. Verify Sanity Studio runs locally\n2. Test creating content in each schema type\n3. Verify GROQ queries return expected data\n4. Test Sanity client connection from Next.js\n5. Verify environment variables are correctly loaded",
         "priority": "high",
-        "dependencies": [
-          1
-        ],
+        "dependencies": [1],
         "status": "pending",
         "subtasks": [
           {
@@ -201,9 +168,7 @@
             "id": 2,
             "title": "Develop Content Schemas for Sanity",
             "description": "Create schema definitions for all content types needed in the website.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create schema files in the `schemas` directory for each content type:\n   - Create `splashScreen.js` schema:\n   ```javascript\n   export default {\n     name: 'splashScreen',\n     title: 'Splash Screen',\n     type: 'document',\n     fields: [\n       {\n         name: 'title',\n         title: 'Title',\n         type: 'string',\n       },\n       {\n         name: 'backgroundImage',\n         title: 'Background Image',\n         type: 'image',\n         options: {\n           hotspot: true,\n         },\n       },\n       {\n         name: 'animationDuration',\n         title: 'Animation Duration (seconds)',\n         type: 'number',\n         validation: Rule => Rule.min(1).max(10),\n       }\n     ]\n   }\n   ```\n   - Create schemas for blog posts, landing page sections, navigation, and site settings\n2. Register all schemas in the `schema.js` file\n3. Test each schema by creating sample content in Sanity Studio",
             "status": "pending",
             "testStrategy": ""
@@ -212,9 +177,7 @@
             "id": 3,
             "title": "Implement GROQ Queries for Content Fetching",
             "description": "Develop GROQ queries to fetch content from Sanity CMS for different parts of the website.",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "1. Create a `lib/sanity.client.js` file to set up the Sanity client:\n```javascript\nimport { createClient } from 'next-sanity'\n\nexport const client = createClient({\n  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,\n  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,\n  apiVersion: '2023-05-03',\n  useCdn: process.env.NODE_ENV === 'production',\n})\n```\n\n2. Create query functions for different content types:\n```javascript\nexport async function getSplashScreen() {\n  return client.fetch(`*[_type == \"splashScreen\"][0]`)\n}\n\nexport async function getHomePage() {\n  return client.fetch(`*[_type == \"homePage\"][0]{\n    title,\n    hero,\n    \"sections\": sections[]{\n      _type,\n      title,\n      content,\n      \"image\": image.asset->url\n    }\n  }`)\n}\n\nexport async function getBlogPosts() {\n  return client.fetch(`*[_type == \"post\"] | order(publishedAt desc) {\n    title,\n    slug,\n    publishedAt,\n    excerpt,\n    \"featuredImage\": featuredImage.asset->url,\n    \"categories\": categories[]->title\n  }`)\n}\n```\n\n3. Test each query function to ensure it returns the expected data",
             "status": "pending",
             "testStrategy": ""
@@ -223,10 +186,7 @@
             "id": 4,
             "title": "Set Up Next.js Client for Sanity Integration",
             "description": "Configure Next.js to connect with Sanity CMS and implement content fetching in components.",
-            "dependencies": [
-              1,
-              3
-            ],
+            "dependencies": [1, 3],
             "details": "1. Install required packages: `npm install next-sanity @portabletext/react @sanity/image-url`\n\n2. Create a reusable hook for fetching Sanity data in `lib/hooks/useSanityData.ts`:\n```typescript\nimport { useQuery } from '@tanstack/react-query'\nimport { client } from '../sanity.client'\n\nexport function useSanityData<T>(query: string) {\n  return useQuery<T>({\n    queryKey: ['sanity', query],\n    queryFn: () => client.fetch(query),\n    staleTime: 1000 * 60 * 5, // 5 minutes\n  })\n}\n```\n\n3. Implement server components for fetching data:\n```typescript\n// app/page.tsx\nimport { getSplashScreen } from '@/lib/sanity.client'\nimport SplashScreen from '@/components/SplashScreen'\n\nexport default async function Home() {\n  const splashData = await getSplashScreen()\n  \n  return <SplashScreen data={splashData} />\n}\n```\n\n4. Test the integration by displaying Sanity content in Next.js components",
             "status": "pending",
             "testStrategy": ""
@@ -235,10 +195,7 @@
             "id": 5,
             "title": "Deploy and Configure Sanity Studio",
             "description": "Set up Sanity Studio deployment and configure CORS settings for production use.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Configure CORS origins in Sanity management console to allow your Next.js app domains\n\n2. Set up Sanity Studio deployment:\n```bash\nsanity deploy\n```\n\n3. Configure authentication and access controls for Sanity Studio:\n   - Set up user roles and permissions in Sanity management console\n   - Configure API access tokens with appropriate permissions\n\n4. Add Sanity Studio as a route in Next.js app:\n   - Create `app/studio/[[...index]]/page.tsx`:\n```typescript\n'use client'\n\nimport { NextStudio } from 'next-sanity/studio'\nimport config from '@/sanity.config'\n\nexport default function StudioPage() {\n  return <NextStudio config={config} />\n}\n```\n\n5. Test the deployed Studio and verify it can be accessed from the Next.js app at `/studio`\n\n6. Document the deployment process and access controls for team members",
             "status": "pending",
             "testStrategy": ""
@@ -252,10 +209,7 @@
         "details": "1. Create `/app/page.tsx` as the splash screen\n2. Implement server component to fetch splash screen content from Sanity:\n   ```typescript\n   async function getSplashContent() {\n     return client.fetch(`*[_type == \"splashScreen\"][0]`)\n   }\n   ```\n3. Design splash screen according to provided design images using Tailwind CSS\n4. Implement animations for splash screen elements using Framer Motion (v10.16.0+)\n5. Add transition to landing page after splash screen display\n6. Ensure the page is fully responsive across all device sizes\n7. Implement SEO metadata using Next.js metadata API\n8. Add loading state while content is being fetched\n9. Implement error handling for failed content fetches",
         "testStrategy": "1. Verify splash screen renders correctly with data from Sanity\n2. Test responsiveness across multiple device sizes\n3. Verify animations work as expected\n4. Test transition to landing page\n5. Verify loading states display correctly\n6. Test error handling by simulating a failed content fetch",
         "priority": "medium",
-        "dependencies": [
-          1,
-          4
-        ],
+        "dependencies": [1, 4],
         "status": "pending",
         "subtasks": [
           {
@@ -271,9 +225,7 @@
             "id": 2,
             "title": "Implement Splash Screen UI with Tailwind CSS",
             "description": "Design and implement the splash screen UI components according to the provided design using Tailwind CSS.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create a client component for the splash screen in `/components/SplashScreen.tsx`:\n```typescript\n'use client'\n\nimport Image from 'next/image'\nimport { urlForImage } from '@/lib/sanity.image'\n\ntype SplashScreenProps = {\n  data: {\n    title: string\n    subtitle: string\n    backgroundImage: any\n    logo: any\n    animationDuration: number\n    ctaText: string\n  }\n}\n\nexport default function SplashScreen({ data }: SplashScreenProps) {\n  return (\n    <div className=\"relative h-screen w-full overflow-hidden bg-black text-white\">\n      {/* Background image with overlay */}\n      <div className=\"absolute inset-0 z-0\">\n        {data.backgroundImage && (\n          <Image\n            src={urlForImage(data.backgroundImage).url()}\n            alt=\"Background\"\n            fill\n            priority\n            className=\"object-cover opacity-40\"\n          />\n        )}\n      </div>\n      \n      {/* Content container */}\n      <div className=\"relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center\">\n        {/* Logo */}\n        {data.logo && (\n          <div className=\"mb-8 w-[180px] md:w-[240px]\">\n            <Image\n              src={urlForImage(data.logo).url()}\n              alt=\"Logo\"\n              width={240}\n              height={120}\n              priority\n              className=\"w-full\"\n            />\n          </div>\n        )}\n        \n        {/* Title and subtitle */}\n        <h1 className=\"mb-4 text-4xl font-bold md:text-5xl lg:text-6xl\">{data.title}</h1>\n        <p className=\"mb-8 max-w-md text-lg md:text-xl\">{data.subtitle}</p>\n      </div>\n    </div>\n  )\n}\n```\n\n2. Create a loading component in `/components/SplashLoading.tsx`:\n```typescript\nexport default function SplashLoading() {\n  return (\n    <div className=\"flex h-screen w-full items-center justify-center bg-black\">\n      <div className=\"h-16 w-16 animate-spin rounded-full border-4 border-white border-t-transparent\"></div>\n    </div>\n  )\n}\n```\n\n3. Test the UI implementation by:\n   - Checking responsiveness across different screen sizes\n   - Verifying image loading and fallbacks\n   - Testing with different content lengths from Sanity",
             "status": "pending",
             "testStrategy": ""
@@ -282,9 +234,7 @@
             "id": 3,
             "title": "Implement Animations with Framer Motion",
             "description": "Add animations to splash screen elements using Framer Motion for a dynamic and engaging user experience.",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "1. Install Framer Motion: `npm install framer-motion`\n\n2. Update the SplashScreen component with animations:\n```typescript\n'use client'\n\nimport Image from 'next/image'\nimport { urlForImage } from '@/lib/sanity.image'\nimport { motion } from 'framer-motion'\nimport { useEffect, useState } from 'react'\n\ntype SplashScreenProps = {\n  data: {\n    title: string\n    subtitle: string\n    backgroundImage: any\n    logo: any\n    animationDuration: number\n    ctaText: string\n  }\n}\n\nexport default function SplashScreen({ data }: SplashScreenProps) {\n  const [isVisible, setIsVisible] = useState(true)\n  \n  // Animation variants\n  const containerVariants = {\n    hidden: { opacity: 0 },\n    visible: { \n      opacity: 1,\n      transition: { \n        when: \"beforeChildren\",\n        staggerChildren: 0.3,\n        duration: 0.8\n      }\n    },\n    exit: { \n      opacity: 0,\n      transition: { \n        when: \"afterChildren\",\n        staggerChildren: 0.1,\n        staggerDirection: -1,\n        duration: 0.5\n      }\n    }\n  }\n  \n  const itemVariants = {\n    hidden: { y: 20, opacity: 0 },\n    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },\n    exit: { y: -20, opacity: 0, transition: { duration: 0.3 } }\n  }\n  \n  return (\n    <motion.div \n      className=\"relative h-screen w-full overflow-hidden bg-black text-white\"\n      variants={containerVariants}\n      initial=\"hidden\"\n      animate=\"visible\"\n      exit=\"exit\"\n    >\n      {/* Background image with overlay */}\n      <motion.div \n        className=\"absolute inset-0 z-0\"\n        initial={{ scale: 1.1, opacity: 0 }}\n        animate={{ scale: 1, opacity: 0.4 }}\n        transition={{ duration: 1.5 }}\n      >\n        {data.backgroundImage && (\n          <Image\n            src={urlForImage(data.backgroundImage).url()}\n            alt=\"Background\"\n            fill\n            priority\n            className=\"object-cover\"\n          />\n        )}\n      </motion.div>\n      \n      {/* Content container */}\n      <div className=\"relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center\">\n        {/* Logo */}\n        {data.logo && (\n          <motion.div \n            className=\"mb-8 w-[180px] md:w-[240px]\"\n            variants={itemVariants}\n          >\n            <Image\n              src={urlForImage(data.logo).url()}\n              alt=\"Logo\"\n              width={240}\n              height={120}\n              priority\n              className=\"w-full\"\n            />\n          </motion.div>\n        )}\n        \n        {/* Title and subtitle */}\n        <motion.h1 \n          className=\"mb-4 text-4xl font-bold md:text-5xl lg:text-6xl\"\n          variants={itemVariants}\n        >\n          {data.title}\n        </motion.h1>\n        <motion.p \n          className=\"mb-8 max-w-md text-lg md:text-xl\"\n          variants={itemVariants}\n        >\n          {data.subtitle}\n        </motion.p>\n      </div>\n    </motion.div>\n  )\n}\n```\n\n3. Test the animations by:\n   - Verifying smooth animation sequences\n   - Testing on different devices for performance\n   - Checking that animations respect reduced motion preferences",
             "status": "pending",
             "testStrategy": ""
@@ -293,9 +243,7 @@
             "id": 4,
             "title": "Implement Page Transition and Responsive Design",
             "description": "Add transition from splash screen to landing page and ensure responsive design across all device sizes.",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "1. Create a transition mechanism in `/app/page.tsx`:\n```typescript\n'use client'\n\nimport { useRouter } from 'next/navigation'\nimport { useEffect, useState } from 'react'\nimport { AnimatePresence } from 'framer-motion'\nimport SplashScreen from '@/components/SplashScreen'\n\nexport default function Home({ splashData }) {\n  const router = useRouter()\n  const [showSplash, setShowSplash] = useState(true)\n  \n  useEffect(() => {\n    // Set timeout based on the duration from Sanity or default to 4000ms\n    const timer = setTimeout(() => {\n      setShowSplash(false)\n      // Short delay before navigation to allow exit animation to complete\n      setTimeout(() => {\n        router.push('/home')\n      }, 500)\n    }, splashData?.animationDuration || 4000)\n    \n    return () => clearTimeout(timer)\n  }, [])\n  \n  return (\n    <AnimatePresence mode=\"wait\">\n      {showSplash && <SplashScreen data={splashData} />}\n    </AnimatePresence>\n  )\n}\n\n// Data fetching\nexport async function getStaticProps() {\n  const splashData = await getSplashContent()\n  return { props: { splashData } }\n}\n```\n\n2. Add responsive design improvements:\n```css\n/* Add to globals.css or use in Tailwind classes */\n@media (max-width: 640px) {\n  .splash-title {\n    font-size: 2rem;\n    line-height: 1.2;\n  }\n  \n  .splash-subtitle {\n    font-size: 1rem;\n  }\n}\n\n@media (min-width: 641px) and (max-width: 1024px) {\n  .splash-title {\n    font-size: 3rem;\n  }\n}\n```\n\n3. Add skip functionality for users who don't want to wait:\n```typescript\n// Add to SplashScreen.tsx\n<motion.button\n  className=\"absolute bottom-8 text-sm opacity-70 hover:opacity-100 transition-opacity\"\n  onClick={() => router.push('/home')}\n  variants={itemVariants}\n>\n  {data.ctaText || 'Skip'}\n</motion.button>\n```\n\n4. Test the transition by:\n   - Verifying smooth transition between splash and landing page\n   - Testing on different screen sizes and orientations\n   - Checking that skip functionality works correctly\n   - Verifying that the splash screen respects user preferences for reduced motion",
             "status": "pending",
             "testStrategy": ""
@@ -309,10 +257,7 @@
         "details": "1. Create `/app/home/page.tsx` for the landing page\n2. Implement server components to fetch landing page content from Sanity:\n   ```typescript\n   async function getLandingPageContent() {\n     return client.fetch(`*[_type == \"landingPage\"][0]{\n       hero,\n       features[],\n       about,\n       // other sections\n     }`)\n   }\n   ```\n3. Create reusable section components in `/components/sections/`:\n   - HeroSection\n   - FeaturesSection\n   - AboutSection\n   - Other sections as per design\n4. Implement responsive design using Tailwind CSS grid and flexbox\n5. Add animations and transitions using Framer Motion\n6. Implement navigation between sections\n7. Ensure all content is dynamically loaded from Sanity\n8. Add proper SEO metadata\n9. Implement lazy loading for images using Next.js Image component\n10. Add scroll-based animations and parallax effects if specified in design",
         "testStrategy": "1. Verify all sections render correctly with data from Sanity\n2. Test responsiveness across multiple device sizes\n3. Verify navigation between sections works correctly\n4. Test image lazy loading\n5. Verify animations and transitions work as expected\n6. Test content updates in Sanity reflect on the landing page",
         "priority": "high",
-        "dependencies": [
-          1,
-          4
-        ],
+        "dependencies": [1, 4],
         "status": "pending",
         "subtasks": [
           {
@@ -328,9 +273,7 @@
             "id": 2,
             "title": "Design Section Component Architecture",
             "description": "Create a modular component architecture for all landing page sections",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create a base `Section` component with common styling and layout properties\n2. Implement a section registry pattern to map Sanity section types to React components\n3. Design props interfaces for each section type with proper TypeScript typing\n4. Create layout components for different section arrangements (full-width, split, grid, etc.)\n5. Implement shared styling utilities for consistent spacing, typography, and colors\n6. Set up Jest tests for the section component architecture",
             "status": "pending",
             "testStrategy": ""
@@ -339,10 +282,7 @@
             "id": 3,
             "title": "Implement Hero Section",
             "description": "Build the main hero section with dynamic content, animations, and responsive design",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Create `HeroSection.tsx` component with responsive layout\n2. Implement heading, subheading, and CTA components with dynamic content from Sanity\n3. Add hero image/video integration with proper loading strategies\n4. Implement entrance animations using Framer Motion\n5. Create responsive variants for mobile, tablet, and desktop\n6. Add unit and integration tests for the hero section",
             "status": "pending",
             "testStrategy": ""
@@ -351,10 +291,7 @@
             "id": 4,
             "title": "Implement Feature Section",
             "description": "Build the features section with dynamic content cards and interactive elements",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Create `FeaturesSection.tsx` component with grid/flex layout\n2. Implement individual feature card components with icons, titles, and descriptions\n3. Add interactive hover states and animations for feature cards\n4. Create responsive layout adjustments for different screen sizes\n5. Implement lazy loading for feature images\n6. Add unit tests for feature components and integration tests for the section",
             "status": "pending",
             "testStrategy": ""
@@ -363,10 +300,7 @@
             "id": 5,
             "title": "Implement About Section",
             "description": "Build the about section with rich text content, media, and responsive layout",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Create `AboutSection.tsx` component with flexible layout\n2. Implement Portable Text renderer for rich content from Sanity\n3. Add media integration (images, videos) with proper aspect ratios\n4. Create responsive design with appropriate text sizing and spacing\n5. Implement scroll-triggered animations for content elements\n6. Add unit and integration tests for the about section",
             "status": "pending",
             "testStrategy": ""
@@ -375,11 +309,7 @@
             "id": 6,
             "title": "Implement Animation and Responsive Design",
             "description": "Add cross-section animations, transitions, and ensure responsive behavior across all devices",
-            "dependencies": [
-              3,
-              4,
-              5
-            ],
+            "dependencies": [3, 4, 5],
             "details": "1. Create shared animation hooks and utilities for consistent motion patterns\n2. Implement intersection observer-based animations for section entrances\n3. Add responsive breakpoint utilities and testing procedures\n4. Create smooth transitions between sections with scroll-linked animations\n5. Implement performance optimizations for animations on mobile devices\n6. Create comprehensive testing suite for responsive behavior and animations",
             "status": "pending",
             "testStrategy": ""
@@ -393,10 +323,7 @@
         "details": "1. Create `/app/blog/page.tsx` for the blog listing page\n2. Create `/app/blog/[slug]/page.tsx` for individual blog posts\n3. Implement server components to fetch blog content from Sanity:\n   ```typescript\n   async function getBlogPosts(page = 1, limit = 10) {\n     const skip = (page - 1) * limit\n     return client.fetch(`{\n       \"posts\": *[_type == \"post\"] | order(publishedAt desc) [${skip}...${skip + limit}] {\n         title,\n         slug,\n         publishedAt,\n         excerpt,\n         \"featuredImage\": featuredImage.asset->url,\n         categories[]->\n       },\n       \"total\": count(*[_type == \"post\"])\n     }`)\n   }\n   \n   async function getPostBySlug(slug) {\n     return client.fetch(`*[_type == \"post\" && slug.current == $slug][0]{\n       title,\n       slug,\n       publishedAt,\n       body,\n       \"featuredImage\": featuredImage.asset->url,\n       categories[]->\n     }`, { slug })\n   }\n   ```\n4. Implement blog listing with pagination using `useSearchParams` for page tracking\n5. Create components for blog cards, pagination controls, and category filters\n6. Implement individual blog post page with rich text rendering using `@portabletext/react`\n7. Add syntax highlighting for code blocks using Prism.js or Highlight.js\n8. Implement responsive design for both listing and post pages\n9. Add \"related posts\" section to individual post pages\n10. Implement micro-writing section with shorter content pieces\n11. Add proper SEO metadata with Open Graph tags for sharing",
         "testStrategy": "1. Verify blog listing page renders correctly with pagination\n2. Test individual blog post pages render correctly\n3. Verify rich text content renders properly including code blocks\n4. Test responsiveness across multiple device sizes\n5. Verify filtering by categories works correctly\n6. Test that content updates in Sanity reflect on the blog\n7. Verify SEO metadata is correctly generated for each post",
         "priority": "high",
-        "dependencies": [
-          1,
-          4
-        ],
+        "dependencies": [1, 4],
         "status": "pending",
         "subtasks": [
           {
@@ -412,9 +339,7 @@
             "id": 2,
             "title": "Develop Individual Blog Post Page",
             "description": "Create the dynamic route and page for displaying individual blog posts with proper metadata and SEO.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create `/app/blog/[slug]/page.tsx` with dynamic routing\n2. Implement getPostBySlug function for data fetching\n3. Set up proper metadata using Next.js Metadata API\n4. Add structured data (JSON-LD) for SEO\n5. Implement social sharing functionality\n6. Create layout with featured image, title, date, and author info\n7. Add tests for post rendering and route handling",
             "status": "pending",
             "testStrategy": ""
@@ -423,9 +348,7 @@
             "id": 3,
             "title": "Implement Rich Text Rendering with Portable Text",
             "description": "Set up the Portable Text renderer to properly display rich content from Sanity CMS including code blocks, images, and custom components.",
-            "dependencies": [
-              2
-            ],
+            "dependencies": [2],
             "details": "1. Install and configure @portabletext/react\n2. Create custom serializers for different content types\n3. Implement code block rendering with syntax highlighting\n4. Add image component with proper sizing and lazy loading\n5. Create custom components for callouts, quotes, and embeds\n6. Test rendering of complex content structures\n7. Ensure proper styling across all content types",
             "status": "pending",
             "testStrategy": ""
@@ -434,9 +357,7 @@
             "id": 4,
             "title": "Implement Category Filtering System",
             "description": "Create a filtering system that allows users to filter blog posts by categories or tags.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create category data fetching function from Sanity\n2. Implement CategoryFilter component with selection UI\n3. Set up URL parameter handling for shareable filtered views\n4. Update blog listing query to support filtering\n5. Add clear filters functionality\n6. Implement proper state management for filter selections\n7. Test filter combinations and edge cases\n8. Ensure filters work with pagination",
             "status": "pending",
             "testStrategy": ""
@@ -445,11 +366,7 @@
             "id": 5,
             "title": "Develop Related Posts Functionality",
             "description": "Implement a system to display related blog posts based on categories, tags, or other relevance criteria.",
-            "dependencies": [
-              2,
-              3,
-              4
-            ],
+            "dependencies": [2, 3, 4],
             "details": "1. Create getRelatedPosts query function using GROQ\n2. Implement RelatedPosts component to display at end of blog posts\n3. Define relevance algorithm based on shared categories and tags\n4. Add limit controls and sorting by relevance/date\n5. Create responsive card layout for related posts\n6. Test edge cases (no related posts, same post exclusion)\n7. Measure and optimize performance of related posts queries",
             "status": "pending",
             "testStrategy": ""
@@ -458,9 +375,7 @@
             "id": 6,
             "title": "Create Micro-writing Section",
             "description": "Implement a dedicated section for micro-writing content with different styling and interaction patterns than full blog posts.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Define Sanity schema for micro-writing content type\n2. Create data fetching function for micro-writing entries\n3. Implement MicroWritingSection component with distinct styling\n4. Add infinite scroll or load more functionality\n5. Create compact rendering for micro-writing entries\n6. Implement interaction patterns (likes, bookmarks)\n7. Test performance with large numbers of micro-writing entries\n8. Add filtering capabilities specific to micro-writing",
             "status": "pending",
             "testStrategy": ""
@@ -474,10 +389,7 @@
         "details": "1. Create `/components/layout/` directory for shared layout components\n2. Implement Navbar component with dynamic content from Sanity:\n   ```typescript\n   async function getNavigationItems() {\n     return client.fetch(`*[_type == \"navigation\"][0].items[]`)\n   }\n   ```\n3. Implement Footer component with dynamic content\n4. Create shared UI components:\n   - Button component with variants using Shadcn\n   - Card component for consistent styling\n   - Section container for consistent padding/margins\n   - Modal/dialog component using Shadcn Dialog\n   - Alert/notification component\n5. Implement mobile navigation with hamburger menu\n6. Add smooth scrolling for navigation links\n7. Implement dark/light mode toggle if required\n8. Create animation components for consistent motion across the site\n9. Ensure all components are fully responsive\n10. Add proper aria attributes for accessibility",
         "testStrategy": "1. Verify navigation renders correctly with data from Sanity\n2. Test mobile navigation functionality\n3. Verify footer renders correctly\n4. Test shared components across different contexts\n5. Verify smooth scrolling works correctly\n6. Test dark/light mode toggle if implemented\n7. Verify accessibility using axe or similar tools",
         "priority": "medium",
-        "dependencies": [
-          1,
-          4
-        ],
+        "dependencies": [1, 4],
         "status": "pending",
         "subtasks": [
           {
@@ -493,9 +405,7 @@
             "id": 2,
             "title": "Develop Footer Component",
             "description": "Create a comprehensive footer component with dynamic content sections from Sanity CMS.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create Footer.tsx in /components/layout/ directory\n2. Implement responsive grid layout for footer sections\n3. Fetch footer content from Sanity CMS\n4. Create social media icons component\n5. Implement newsletter signup form if required\n6. Add copyright and legal links section\n7. Ensure proper spacing and alignment across screen sizes\n8. Write unit tests for footer rendering and interactions\n9. Document component API and props",
             "status": "pending",
             "testStrategy": ""
@@ -504,9 +414,7 @@
             "id": 3,
             "title": "Build Reusable UI Component Library",
             "description": "Establish a library of reusable UI components with consistent styling and behavior patterns.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Set up Shadcn UI integration\n2. Create Button component with multiple variants (primary, secondary, outline, text)\n3. Develop Card component with flexible content slots\n4. Implement Section container for consistent layout spacing\n5. Create Form components (inputs, checkboxes, radio buttons)\n6. Develop Modal/Dialog component\n7. Implement Tabs component\n8. Create component documentation with Storybook\n9. Write comprehensive tests for all components\n10. Establish component composition patterns",
             "status": "pending",
             "testStrategy": ""
@@ -515,11 +423,7 @@
             "id": 4,
             "title": "Implement Animation and Interaction Patterns",
             "description": "Create consistent animation and interaction patterns for shared components using Framer Motion.",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "1. Set up Framer Motion integration\n2. Create animation variants for common transitions\n3. Implement page transition animations\n4. Develop hover and focus animations for interactive elements\n5. Create loading state animations\n6. Implement scroll-triggered animations\n7. Ensure animations respect reduced-motion preferences\n8. Document animation patterns for team consistency\n9. Test animations across different browsers and devices\n10. Optimize animations for performance",
             "status": "pending",
             "testStrategy": ""
@@ -528,12 +432,7 @@
             "id": 5,
             "title": "Implement Accessibility Features",
             "description": "Ensure all shared components meet WCAG 2.1 AA standards with proper accessibility implementation.",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "dependencies": [1, 2, 3, 4],
             "details": "1. Add proper ARIA attributes to all interactive components\n2. Implement keyboard navigation for all interactive elements\n3. Ensure proper focus management in modals and dropdowns\n4. Add skip-to-content link in navigation\n5. Test color contrast ratios across the component library\n6. Implement proper heading hierarchy\n7. Add screen reader announcements for dynamic content\n8. Test with screen readers (NVDA, VoiceOver)\n9. Create accessibility documentation and guidelines\n10. Implement automated accessibility testing with axe-core",
             "status": "pending",
             "testStrategy": ""
@@ -547,12 +446,7 @@
         "details": "1. Install required packages: `npm install @sanity/preview-kit next-sanity`\n2. Set up preview configuration in Sanity Studio\n3. Create preview-specific API routes in Next.js\n4. Implement PreviewProvider component:\n   ```typescript\n   // components/PreviewProvider.tsx\n   'use client'\n   \n   import { LiveQueryProvider } from '@sanity/preview-kit'\n   import { client } from '@/lib/sanity.client'\n   \n   export default function PreviewProvider({ children }) {\n     return (\n       <LiveQueryProvider client={client}>\n         {children}\n       </LiveQueryProvider>\n     )\n   }\n   ```\n5. Create preview-aware components that use both static and live data\n6. Add preview mode toggle in Sanity Studio\n7. Implement preview routing in Next.js\n8. Add visual indicator when in preview mode\n9. Configure proper authentication for preview routes",
         "testStrategy": "1. Verify preview mode can be enabled from Sanity Studio\n2. Test that content changes in Sanity Studio appear in real-time in preview mode\n3. Verify preview mode is properly secured\n4. Test preview mode across different content types\n5. Verify preview indicator is visible when in preview mode",
         "priority": "medium",
-        "dependencies": [
-          4,
-          5,
-          6,
-          7
-        ],
+        "dependencies": [4, 5, 6, 7],
         "status": "pending",
         "subtasks": [
           {
@@ -568,9 +462,7 @@
             "id": 2,
             "title": "Implement Next.js Preview API Routes",
             "description": "Create the necessary API routes in Next.js to handle preview session management and authentication.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create API route for enabling preview mode:\n```typescript\n// app/api/preview/route.ts\nexport async function GET(request: Request) {\n  const { searchParams } = new URL(request.url)\n  const secret = searchParams.get('secret')\n  const slug = searchParams.get('slug')\n  \n  if (secret !== process.env.SANITY_PREVIEW_SECRET) {\n    return new Response(JSON.stringify({ message: 'Invalid token' }), {\n      status: 401,\n    })\n  }\n  \n  const response = new Response(JSON.stringify({ preview: true }), {\n    status: 200,\n  })\n  \n  response.cookies.set('sanity-preview', 'true', {\n    maxAge: 60 * 60, // 1 hour\n    httpOnly: true,\n    path: '/',\n    secure: process.env.NODE_ENV === 'production',\n  })\n  \n  return response\n}\n```\n2. Create API route for disabling preview mode:\n```typescript\n// app/api/exit-preview/route.ts\nexport async function GET() {\n  const response = new Response(JSON.stringify({ preview: false }), {\n    status: 200,\n  })\n  \n  response.cookies.set('sanity-preview', '', {\n    maxAge: 0,\n    path: '/',\n  })\n  \n  return response\n}\n```\n3. Create utility function to check if preview mode is active",
             "status": "pending",
             "testStrategy": ""
@@ -579,10 +471,7 @@
             "id": 3,
             "title": "Create PreviewProvider Component",
             "description": "Implement the PreviewProvider component that will wrap the application and provide real-time updates from Sanity.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Create the PreviewProvider component:\n```typescript\n// components/PreviewProvider.tsx\n'use client'\n\nimport { LiveQueryProvider } from '@sanity/preview-kit'\nimport { client } from '@/lib/sanity.client'\n\nexport default function PreviewProvider({ \n  children,\n  token,\n}: {\n  children: React.ReactNode\n  token: string\n}) {\n  if (!token) {\n    return <>{children}</>\n  }\n  \n  return (\n    <LiveQueryProvider client={client} token={token}>\n      {children}\n      <div className=\"fixed bottom-0 left-0 right-0 bg-black text-white p-2 text-center text-sm\">\n        Preview Mode - <a href=\"/api/exit-preview\" className=\"underline\">Exit</a>\n      </div>\n    </LiveQueryProvider>\n  )\n}\n```\n2. Update the root layout to conditionally wrap with PreviewProvider:\n```typescript\n// app/layout.tsx\nimport { draftMode } from 'next/headers'\nimport { token } from '@/lib/sanity.fetch'\nimport PreviewProvider from '@/components/PreviewProvider'\n\nexport default function RootLayout({ children }) {\n  const { isEnabled } = draftMode()\n  const previewToken = isEnabled ? token : null\n  \n  return (\n    <html lang=\"en\">\n      <body>\n        <PreviewProvider token={previewToken}>\n          {children}\n        </PreviewProvider>\n      </body>\n    </html>\n  )\n}\n```",
             "status": "pending",
             "testStrategy": ""
@@ -591,9 +480,7 @@
             "id": 4,
             "title": "Implement Preview-Aware Components",
             "description": "Update content components to be preview-aware, allowing them to display draft content when in preview mode.",
-            "dependencies": [
-              3
-            ],
+            "dependencies": [3],
             "details": "1. Create a utility function for preview-aware queries:\n```typescript\n// lib/sanity.fetch.ts\nimport { draftMode } from 'next/headers'\nimport { client } from './sanity.client'\nimport { groq } from 'next-sanity'\n\nexport const token = process.env.SANITY_API_READ_TOKEN\n\nexport async function sanityFetch({\n  query,\n  params = {},\n  tags = [],\n}) {\n  const { isEnabled } = draftMode()\n  \n  if (isEnabled && !token) {\n    throw new Error('Missing preview token')\n  }\n  \n  return client.fetch(query, params, {\n    ...(isEnabled && token ? { token, perspective: 'previewDrafts' } : {}),\n    next: { tags },\n  })\n}\n```\n2. Update content components to use the preview-aware fetch:\n```typescript\n// app/blog/[slug]/page.tsx\nimport { sanityFetch } from '@/lib/sanity.fetch'\nimport { useParams } from 'next/navigation'\nimport { PreviewSuspense, usePreviewSubscription } from '@sanity/preview-kit'\n\nexport default async function BlogPost({ params }) {\n  const { slug } = params\n  const query = groq`*[_type == \"post\" && slug.current == $slug][0]`\n  const queryParams = { slug }\n  const post = await sanityFetch({ query, params: queryParams })\n  \n  return (\n    <article>\n      <h1>{post.title}</h1>\n      <div>{/* Render content */}</div>\n    </article>\n  )\n}\n```\n3. Create client-side preview components for real-time updates:\n```typescript\n// components/PreviewPost.tsx\n'use client'\n\nimport { usePreviewSubscription } from '@sanity/preview-kit'\n\nexport default function PreviewPost({ query, queryParams, initialData }) {\n  const { data } = usePreviewSubscription(query, {\n    params: queryParams,\n    initialData,\n  })\n  \n  return (\n    <article>\n      <h1>{data.title}</h1>\n      <div>{/* Render content */}</div>\n    </article>\n  )\n}\n```\n4. Test preview functionality across different content types",
             "status": "pending",
             "testStrategy": ""
@@ -607,12 +494,7 @@
         "details": "1. Implement dynamic metadata using Next.js Metadata API:\n   ```typescript\n   // app/blog/[slug]/page.tsx\n   export async function generateMetadata({ params }) {\n     const post = await getPostBySlug(params.slug)\n     return {\n       title: post.title,\n       description: post.excerpt,\n       openGraph: {\n         title: post.title,\n         description: post.excerpt,\n         images: [post.featuredImage],\n       },\n     }\n   }\n   ```\n2. Add structured data (JSON-LD) for rich search results\n3. Implement image optimization using Next.js Image component with proper sizing\n4. Set up font optimization using `next/font`\n5. Implement route prefetching for faster navigation\n6. Add proper caching headers for static assets\n7. Implement responsive images with srcset\n8. Configure Content Security Policy\n9. Add sitemap.xml and robots.txt generation\n10. Implement performance monitoring using Web Vitals\n11. Optimize Tailwind CSS for production using PurgeCSS",
         "testStrategy": "1. Verify metadata is correctly generated for all pages\n2. Test structured data using Google's Rich Results Test\n3. Measure performance using Lighthouse and PageSpeed Insights\n4. Verify image optimization is working correctly\n5. Test Core Web Vitals metrics\n6. Verify sitemap.xml and robots.txt are correctly generated\n7. Test CSP headers are properly applied",
         "priority": "medium",
-        "dependencies": [
-          5,
-          6,
-          7,
-          8
-        ],
+        "dependencies": [5, 6, 7, 8],
         "status": "pending",
         "subtasks": [
           {
@@ -628,9 +510,7 @@
             "id": 2,
             "title": "Implement Structured Data and Open Graph Tags",
             "description": "Add comprehensive structured data (JSON-LD) and enhanced Open Graph tags for rich search results and social media sharing.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Create JSON-LD schemas for different content types (articles, products, etc.)\n2. Implement comprehensive Open Graph tags including og:image, og:type, og:url\n3. Add Twitter card metadata\n4. Set up Facebook-specific Open Graph tags\n5. Implement schema.org markup for rich search results\n\nCode example:\n```typescript\n// components/JsonLd.tsx\n'use client'\nimport { useEffect } from 'react'\n\nexport function JsonLd({ data }) {\n  useEffect(() => {\n    const script = document.createElement('script')\n    script.type = 'application/ld+json'\n    script.text = JSON.stringify(data)\n    document.head.appendChild(script)\n    return () => document.head.removeChild(script)\n  }, [data])\n  return null\n}\n\n// Usage in page component\n<JsonLd data={{\n  '@context': 'https://schema.org',\n  '@type': 'BlogPosting',\n  'headline': post.title,\n  'datePublished': post.publishedAt,\n  'author': {\n    '@type': 'Person',\n    'name': post.author.name\n  }\n}} />\n```",
             "status": "pending",
             "testStrategy": ""
@@ -639,9 +519,7 @@
             "id": 3,
             "title": "Optimize Images and Fonts",
             "description": "Implement image and font optimization techniques to improve loading performance and Core Web Vitals.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Configure Next.js Image component for all images\n2. Set up responsive image sizes and formats (WebP, AVIF)\n3. Implement lazy loading for below-the-fold images\n4. Configure font optimization with next/font\n5. Set up font preloading and display strategies\n\nCode example:\n```typescript\n// app/layout.tsx\nimport { Inter, Roboto } from 'next/font/google'\n\nconst inter = Inter({\n  subsets: ['latin'],\n  display: 'swap',\n  variable: '--font-inter'\n})\n\nconst roboto = Roboto({\n  weight: ['400', '700'],\n  subsets: ['latin'],\n  display: 'swap',\n  variable: '--font-roboto'\n})\n\n// components/OptimizedImage.tsx\nimport Image from 'next/image'\n\nexport function OptimizedImage({ src, alt, ...props }) {\n  return (\n    <Image\n      src={src}\n      alt={alt}\n      width={800}\n      height={600}\n      sizes=\"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw\"\n      placeholder=\"blur\"\n      blurDataURL=\"data:image/png;base64,...\"\n      {...props}\n    />\n  )\n}\n```",
             "status": "pending",
             "testStrategy": ""
@@ -650,11 +528,7 @@
             "id": 4,
             "title": "Implement Caching and Performance Headers",
             "description": "Set up caching strategies and performance-related HTTP headers to improve load times and Core Web Vitals.",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "1. Configure caching headers for static assets\n2. Implement Content Security Policy headers\n3. Set up HTTP/2 Server Push for critical resources\n4. Configure service worker for offline capabilities\n5. Implement stale-while-revalidate caching strategy\n\nCode example:\n```typescript\n// middleware.ts\nimport { NextResponse } from 'next/server'\nimport type { NextRequest } from 'next/server'\n\nexport function middleware(request: NextRequest) {\n  const response = NextResponse.next()\n  \n  // Add security headers\n  response.headers.set('X-DNS-Prefetch-Control', 'on')\n  response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')\n  response.headers.set('X-Content-Type-Options', 'nosniff')\n  response.headers.set('X-Frame-Options', 'DENY')\n  \n  // Add caching headers for static assets\n  if (request.nextUrl.pathname.match(/\\.(jpg|jpeg|png|webp|avif|css|js)$/)) {\n    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')\n  }\n  \n  return response\n}\n```",
             "status": "pending",
             "testStrategy": ""
@@ -663,10 +537,7 @@
             "id": 5,
             "title": "Generate Sitemap and Robots.txt",
             "description": "Create dynamic sitemap.xml and robots.txt files to improve search engine crawling and indexing.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Set up dynamic sitemap.xml generation\n2. Configure robots.txt with appropriate rules\n3. Implement sitemap index for large sites\n4. Add changefreq and priority attributes to sitemap entries\n5. Test sitemap with Google Search Console\n\nCode example:\n```typescript\n// app/sitemap.ts\nimport { MetadataRoute } from 'next'\nimport { client } from '@/lib/sanity.client'\n\nexport default async function sitemap(): Promise<MetadataRoute.Sitemap> {\n  const baseUrl = 'https://yourdomain.com'\n  \n  // Get all blog posts\n  const posts = await client.fetch(`*[_type == \"post\"]{ slug, _updatedAt }`)\n  \n  // Generate sitemap entries for posts\n  const postEntries = posts.map((post) => ({\n    url: `${baseUrl}/blog/${post.slug.current}`,\n    lastModified: new Date(post._updatedAt),\n    changeFrequency: 'weekly',\n    priority: 0.8,\n  }))\n  \n  // Add static pages\n  const staticPages = [\n    { url: baseUrl, lastModified: new Date(), priority: 1.0 },\n    { url: `${baseUrl}/about`, lastModified: new Date(), priority: 0.7 },\n    // Add other static pages\n  ]\n  \n  return [...staticPages, ...postEntries]\n}\n\n// app/robots.ts\nimport { MetadataRoute } from 'next'\n\nexport default function robots(): MetadataRoute.Robots {\n  return {\n    rules: {\n      userAgent: '*',\n      allow: '/',\n      disallow: ['/api/', '/admin/'],\n    },\n    sitemap: 'https://yourdomain.com/sitemap.xml',\n  }\n}\n```",
             "status": "pending",
             "testStrategy": ""
@@ -680,12 +551,7 @@
         "details": "1. Create error boundary components using React Error Boundary:\n   ```typescript\n   // components/ErrorBoundary.tsx\n   'use client'\n   \n   import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'\n   \n   export function ErrorBoundary({ children }) {\n     return (\n       <ReactErrorBoundary fallback={<ErrorFallback />}>\n         {children}\n       </ReactErrorBoundary>\n     )\n   }\n   \n   function ErrorFallback() {\n     return (\n       <div className=\"p-4 bg-red-50 border border-red-200 rounded-md\">\n         <h2 className=\"text-lg font-semibold text-red-800\">Something went wrong</h2>\n         <p className=\"text-red-600\">We're sorry, but there was an error loading this content.</p>\n       </div>\n     )\n   }\n   ```\n2. Implement Next.js error.tsx files for route error handling\n3. Create loading.tsx files for route loading states\n4. Implement skeleton loading components using Shadcn Skeleton\n5. Add retry mechanisms for failed data fetches\n6. Create 404 Not Found page\n7. Create 500 Server Error page\n8. Implement offline fallback page\n9. Add toast notifications for transient errors\n10. Implement graceful degradation for missing content",
         "testStrategy": "1. Verify error boundaries catch and display errors correctly\n2. Test loading states appear during data fetching\n3. Verify 404 page displays for non-existent routes\n4. Test error handling by simulating API failures\n5. Verify skeleton loaders render correctly\n6. Test offline functionality\n7. Verify toast notifications appear for transient errors",
         "priority": "medium",
-        "dependencies": [
-          5,
-          6,
-          7,
-          8
-        ],
+        "dependencies": [5, 6, 7, 8],
         "status": "pending",
         "subtasks": [
           {
@@ -701,9 +567,7 @@
             "id": 2,
             "title": "Develop Loading State Components",
             "description": "Create a comprehensive set of loading state components to provide visual feedback during data fetching operations.",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Design and implement skeleton loaders for different content types (cards, lists, text)\n2. Create loading spinners and progress indicators with consistent styling\n3. Implement delayed loading states to prevent flickering for fast operations\n4. Add loading state transitions and animations using Framer Motion\n5. Create tests to verify loading states render correctly in different scenarios\n6. Ensure loading components are accessible with proper ARIA attributes",
             "status": "pending",
             "testStrategy": ""
@@ -712,10 +576,7 @@
             "id": 3,
             "title": "Create Error Page Implementations",
             "description": "Develop dedicated error pages for different error scenarios including 404, 500, and offline states.",
-            "dependencies": [
-              1,
-              2
-            ],
+            "dependencies": [1, 2],
             "details": "1. Design and implement a custom 404 page for not found resources\n2. Create a 500 error page for server-side errors\n3. Implement error pages with helpful navigation options and clear messaging\n4. Add error details display for development environment\n5. Create tests to verify error pages render correctly\n6. Ensure error pages maintain consistent branding and design language\n7. Implement analytics tracking for error occurrences",
             "status": "pending",
             "testStrategy": ""
@@ -724,10 +585,7 @@
             "id": 4,
             "title": "Implement Offline Fallback Functionality",
             "description": "Develop offline detection and fallback mechanisms to provide a graceful experience when users lose connectivity.",
-            "dependencies": [
-              1,
-              3
-            ],
+            "dependencies": [1, 3],
             "details": "1. Implement network status detection using the Navigator.onLine API\n2. Create offline notification components to alert users when connectivity is lost\n3. Develop offline fallback UI that shows cached content when available\n4. Implement retry mechanisms for failed requests when connectivity is restored\n5. Add service worker configuration for offline asset caching\n6. Create tests to simulate and verify offline functionality\n7. Document offline capabilities and limitations for users",
             "status": "pending",
             "testStrategy": ""
@@ -741,19 +599,7 @@
         "details": "1. Create detailed README.md with:\n   - Project overview\n   - Setup instructions\n   - Environment variables documentation\n   - Git workflow explanation\n   - Deployment process\n2. Create Sanity content management guide:\n   - How to access Sanity Studio\n   - Content structure explanation\n   - Step-by-step content editing instructions\n   - Publishing workflow\n   - Media management\n3. Document GitHub Actions workflows\n4. Create deployment documentation for each environment:\n   - Development\n   - Staging\n   - Production\n5. Add inline code documentation with JSDoc comments\n6. Create architecture diagram showing the relationship between Next.js and Sanity\n7. Document performance optimization techniques used\n8. Create troubleshooting guide for common issues\n9. Add license information\n10. Include contact information for support",
         "testStrategy": "1. Verify README.md contains all required sections\n2. Test setup instructions by following them on a clean environment\n3. Verify Sanity content management guide is comprehensive and accurate\n4. Test deployment documentation by following the steps\n5. Review code documentation for completeness\n6. Verify troubleshooting guide addresses common issues",
         "priority": "low",
-        "dependencies": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
+        "dependencies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
         "status": "pending",
         "subtasks": [
           {
@@ -769,9 +615,7 @@
             "id": 2,
             "title": "Develop Sanity Content Management Guide",
             "description": "Create comprehensive documentation for content editors using Sanity CMS",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Document Sanity Studio access and authentication\n2. Create content structure diagrams and explanations\n3. Write step-by-step content editing instructions with screenshots\n4. Document publishing workflow and content approval process\n5. Create media management guidelines (image sizes, formats, optimization)\n6. Include content validation rules and best practices\n7. Test guide by having a non-technical user follow the instructions",
             "status": "pending",
             "testStrategy": ""
@@ -780,9 +624,7 @@
             "id": 3,
             "title": "Create Deployment Process Documentation",
             "description": "Document the complete deployment workflow for all environments",
-            "dependencies": [
-              1
-            ],
+            "dependencies": [1],
             "details": "1. Document GitHub Actions CI/CD workflows with diagrams\n2. Create environment-specific deployment instructions (development, staging, production)\n3. Document required environment variables for each deployment target\n4. Create rollback procedures for failed deployments\n5. Document post-deployment verification steps\n6. Include performance monitoring and error tracking setup\n7. Test documentation by performing a complete deployment cycle",
             "status": "pending",
             "testStrategy": ""
@@ -791,11 +633,7 @@
             "id": 4,
             "title": "Develop Code Documentation and Architecture Diagrams",
             "description": "Create technical documentation explaining code structure and architecture",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
+            "dependencies": [1, 2, 3],
             "details": "1. Create high-level architecture diagram showing system components\n2. Document data flow between Next.js frontend and Sanity backend\n3. Create component hierarchy diagrams\n4. Document API endpoints and data structures\n5. Create state management documentation\n6. Document code conventions and patterns used\n7. Include performance optimization strategies\n8. Verify documentation accuracy through peer review",
             "status": "pending",
             "testStrategy": ""

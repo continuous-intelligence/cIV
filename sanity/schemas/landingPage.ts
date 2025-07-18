@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField } from 'sanity';
 
 export const landingPage = defineType({
   name: 'landingPage',
@@ -9,7 +9,7 @@ export const landingPage = defineType({
       name: 'title',
       title: 'Page Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -19,7 +19,7 @@ export const landingPage = defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'seo',
@@ -30,13 +30,13 @@ export const landingPage = defineType({
           name: 'metaTitle',
           title: 'Meta Title',
           type: 'string',
-          validation: (Rule) => Rule.max(60),
+          validation: Rule => Rule.max(60),
         },
         {
           name: 'metaDescription',
           title: 'Meta Description',
           type: 'text',
-          validation: (Rule) => Rule.max(160),
+          validation: Rule => Rule.max(160),
         },
         {
           name: 'ogImage',
@@ -57,7 +57,7 @@ export const landingPage = defineType({
           name: 'headline',
           title: 'Headline',
           type: 'string',
-          validation: (Rule) => Rule.required(),
+          validation: Rule => Rule.required(),
         },
         {
           name: 'subheadline',
@@ -251,4 +251,4 @@ export const landingPage = defineType({
       subtitle: 'slug.current',
     },
   },
-}) 
+});

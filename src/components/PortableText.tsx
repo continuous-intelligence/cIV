@@ -1,17 +1,21 @@
-import { PortableText as BasePortableText } from '@portabletext/react'
-import { PortableTextBlock } from '@portabletext/types'
-import Image from 'next/image'
-import { urlFor } from '../lib/image'
+import { PortableText as BasePortableText } from '@portabletext/react';
+import { PortableTextBlock } from '@portabletext/types';
+import Image from 'next/image';
+import { urlFor } from '../lib/image';
 
 interface PortableTextProps {
-  value: PortableTextBlock[]
-  className?: string
+  value: PortableTextBlock[];
+  className?: string;
 }
 
 const components = {
   types: {
-    image: ({ value }: any) => {
-      const imageUrl = urlFor(value).width(800).height(600).url()
+    image: ({
+      value,
+    }: {
+      value: { asset: { _ref: string; _type: 'reference' }; alt?: string };
+    }) => {
+      const imageUrl = urlFor(value).width(800).height(600).url();
       return (
         <div className="my-8">
           <Image
@@ -27,71 +31,74 @@ const components = {
             </p>
           )}
         </div>
-      )
-    },
-    codeBlock: ({ value }: any) => {
-      return (
-        <div className="my-8">
-          <pre className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto">
-            <code className={`language-${value.language || 'text'}`}>
-              {value.code}
-            </code>
-          </pre>
-        </div>
-      )
+      );
     },
   },
   block: {
-    normal: ({ children }: any) => (
-      <p className="mb-4 text-base leading-relaxed text-gray-700">{children}</p>
+    h1: ({ children }: { children?: React.ReactNode }) => (
+      <h1 className="text-4xl font-bold mb-6 text-gray-900">{children}</h1>
     ),
-    h1: ({ children }: any) => (
-      <h1 className="text-4xl font-bold mt-8 mb-4 text-gray-900">{children}</h1>
+    h2: ({ children }: { children?: React.ReactNode }) => (
+      <h2 className="text-3xl font-bold mb-4 text-gray-900">{children}</h2>
     ),
-    h2: ({ children }: any) => (
-      <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-900">{children}</h2>
+    h3: ({ children }: { children?: React.ReactNode }) => (
+      <h3 className="text-2xl font-bold mb-3 text-gray-900">{children}</h3>
     ),
-    h3: ({ children }: any) => (
-      <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-900">{children}</h3>
+    h4: ({ children }: { children?: React.ReactNode }) => (
+      <h4 className="text-xl font-bold mb-2 text-gray-900">{children}</h4>
     ),
-    h4: ({ children }: any) => (
-      <h4 className="text-xl font-semibold mt-6 mb-3 text-gray-900">{children}</h4>
+    h5: ({ children }: { children?: React.ReactNode }) => (
+      <h5 className="text-lg font-bold mb-2 text-gray-900">{children}</h5>
     ),
-    blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 my-6 italic text-gray-700 bg-gray-50 py-2">
+    h6: ({ children }: { children?: React.ReactNode }) => (
+      <h6 className="text-base font-bold mb-2 text-gray-900">{children}</h6>
+    ),
+    blockquote: ({ children }: { children?: React.ReactNode }) => (
+      <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4 text-gray-700">
         {children}
       </blockquote>
     ),
+    normal: ({ children }: { children?: React.ReactNode }) => (
+      <p className="mb-4 text-gray-800 leading-relaxed">{children}</p>
+    ),
   },
   list: {
-    bullet: ({ children }: any) => (
-      <ul className="list-disc pl-6 mb-4 space-y-2">{children}</ul>
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <ul className="list-disc list-inside mb-4 text-gray-800">{children}</ul>
     ),
-    number: ({ children }: any) => (
-      <ol className="list-decimal pl-6 mb-4 space-y-2">{children}</ol>
+    number: ({ children }: { children?: React.ReactNode }) => (
+      <ol className="list-decimal list-inside mb-4 text-gray-800">
+        {children}
+      </ol>
     ),
   },
   listItem: {
-    bullet: ({ children }: any) => (
-      <li className="text-gray-700">{children}</li>
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <li className="mb-1">{children}</li>
     ),
-    number: ({ children }: any) => (
-      <li className="text-gray-700">{children}</li>
+    number: ({ children }: { children?: React.ReactNode }) => (
+      <li className="mb-1">{children}</li>
     ),
   },
   marks: {
-    strong: ({ children }: any) => (
-      <strong className="font-semibold">{children}</strong>
+    strong: ({ children }: { children?: React.ReactNode }) => (
+      <strong className="font-bold">{children}</strong>
     ),
-    em: ({ children }: any) => (
+    em: ({ children }: { children?: React.ReactNode }) => (
       <em className="italic">{children}</em>
     ),
-    code: ({ children }: any) => (
-      <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800">
+    code: ({ children }: { children?: React.ReactNode }) => (
+      <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">
         {children}
       </code>
     ),
-    link: ({ children, value }: any) => (
+    link: ({
+      value,
+      children,
+    }: {
+      value?: { href: string };
+      children?: React.ReactNode;
+    }) => (
       <a
         href={value?.href}
         target="_blank"
@@ -102,12 +109,15 @@ const components = {
       </a>
     ),
   },
-}
+};
 
-export default function PortableText({ value, className = '' }: PortableTextProps) {
+export default function PortableText({
+  value,
+  className = '',
+}: PortableTextProps) {
   return (
     <div className={`prose prose-lg max-w-none ${className}`}>
       <BasePortableText value={value} components={components} />
     </div>
-  )
-} 
+  );
+}

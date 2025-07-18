@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity'
+import { groq } from 'next-sanity';
 
 // Landing Page Queries
 export const landingPageQuery = groq`
@@ -79,7 +79,7 @@ export const landingPageQuery = groq`
       }
     }
   }
-`
+`;
 
 // Blog Post Queries
 export const blogPostsQuery = groq`
@@ -112,7 +112,7 @@ export const blogPostsQuery = groq`
     featured,
     readTime
   }
-`
+`;
 
 export const blogPostQuery = groq`
   *[_type == "blogPost" && slug.current == $slug][0] {
@@ -159,7 +159,7 @@ export const blogPostQuery = groq`
     featured,
     readTime
   }
-`
+`;
 
 export const featuredBlogPostsQuery = groq`
   *[_type == "blogPost" && featured == true] | order(publishedAt desc) [0...3] {
@@ -187,7 +187,7 @@ export const featuredBlogPostsQuery = groq`
     excerpt,
     readTime
   }
-`
+`;
 
 // Author Queries
 export const authorQuery = groq`
@@ -206,7 +206,7 @@ export const authorQuery = groq`
     email,
     socialLinks
   }
-`
+`;
 
 export const authorsQuery = groq`
   *[_type == "author"] | order(name asc) {
@@ -222,7 +222,7 @@ export const authorsQuery = groq`
     },
     bio
   }
-`
+`;
 
 // Splash Screen Query
 export const splashScreenQuery = groq`
@@ -254,7 +254,7 @@ export const splashScreenQuery = groq`
     },
     redirectTo
   }
-`
+`;
 
 // Settings Query
 export const settingsQuery = groq`
@@ -301,7 +301,7 @@ export const settingsQuery = groq`
     contact,
     maintenance
   }
-`
+`;
 
 // Search Query
 export const searchQuery = groq`
@@ -318,7 +318,7 @@ export const searchQuery = groq`
       excerpt
     }
   }
-`
+`;
 
 // Category Query
 export const categoryQuery = groq`
@@ -347,7 +347,7 @@ export const categoryQuery = groq`
     excerpt,
     readTime
   }
-`
+`;
 
 // Related Posts Query
 export const relatedPostsQuery = groq`
@@ -369,4 +369,4 @@ export const relatedPostsQuery = groq`
     excerpt,
     readTime
   }
-` 
+`;

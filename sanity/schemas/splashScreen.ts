@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField } from 'sanity';
 
 export const splashScreen = defineType({
   name: 'splashScreen',
@@ -9,7 +9,7 @@ export const splashScreen = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'isActive',
@@ -38,7 +38,7 @@ export const splashScreen = defineType({
       name: 'brandName',
       title: 'Brand Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'tagline',
@@ -51,14 +51,20 @@ export const splashScreen = defineType({
       title: 'Background Color',
       type: 'string',
       description: 'Hex color code for background (e.g., #ffffff)',
-      validation: (Rule) => Rule.regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).error('Please enter a valid hex color'),
+      validation: Rule =>
+        Rule.regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).error(
+          'Please enter a valid hex color'
+        ),
     }),
     defineField({
       name: 'textColor',
       title: 'Text Color',
       type: 'string',
       description: 'Hex color code for text (e.g., #000000)',
-      validation: (Rule) => Rule.regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).error('Please enter a valid hex color'),
+      validation: Rule =>
+        Rule.regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/).error(
+          'Please enter a valid hex color'
+        ),
     }),
     defineField({
       name: 'animationSettings',
@@ -69,7 +75,7 @@ export const splashScreen = defineType({
           name: 'duration',
           title: 'Duration (seconds)',
           type: 'number',
-          validation: (Rule) => Rule.min(1).max(10),
+          validation: Rule => Rule.min(1).max(10),
           initialValue: 3,
         },
         {
@@ -129,7 +135,8 @@ export const splashScreen = defineType({
       name: 'redirectTo',
       title: 'Redirect To',
       type: 'string',
-      description: 'Page to redirect to after splash screen (e.g., /home, /landing)',
+      description:
+        'Page to redirect to after splash screen (e.g., /home, /landing)',
       initialValue: '/landing',
     }),
   ],
@@ -140,4 +147,4 @@ export const splashScreen = defineType({
       media: 'logo',
     },
   },
-}) 
+});

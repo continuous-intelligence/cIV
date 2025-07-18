@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField } from 'sanity';
 
 export const settings = defineType({
   name: 'settings',
@@ -9,13 +9,13 @@ export const settings = defineType({
       name: 'title',
       title: 'Site Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Site Description',
       type: 'text',
-      validation: (Rule) => Rule.max(160),
+      validation: Rule => Rule.max(160),
     }),
     defineField({
       name: 'keywords',
@@ -100,13 +100,13 @@ export const settings = defineType({
           name: 'metaTitle',
           title: 'Default Meta Title',
           type: 'string',
-          validation: (Rule) => Rule.max(60),
+          validation: Rule => Rule.max(60),
         },
         {
           name: 'metaDescription',
           title: 'Default Meta Description',
           type: 'text',
-          validation: (Rule) => Rule.max(160),
+          validation: Rule => Rule.max(160),
         },
         {
           name: 'ogImage',
@@ -143,7 +143,8 @@ export const settings = defineType({
           name: 'googleTagManagerId',
           title: 'Google Tag Manager ID',
           type: 'string',
-          description: 'Your Google Tag Manager container ID (e.g., GTM-XXXXXXX)',
+          description:
+            'Your Google Tag Manager container ID (e.g., GTM-XXXXXXX)',
         },
         {
           name: 'facebookPixelId',
@@ -201,4 +202,4 @@ export const settings = defineType({
       media: 'logo',
     },
   },
-}) 
+});

@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField } from 'sanity';
 
 export const blogPost = defineType({
   name: 'blogPost',
@@ -9,7 +9,7 @@ export const blogPost = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -19,14 +19,14 @@ export const blogPost = defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: [{ type: 'author' }],
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'mainImage',
@@ -54,14 +54,14 @@ export const blogPost = defineType({
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
       rows: 4,
-      validation: (Rule) => Rule.max(200),
+      validation: Rule => Rule.max(200),
     }),
     defineField({
       name: 'body',
@@ -154,13 +154,13 @@ export const blogPost = defineType({
           name: 'metaTitle',
           title: 'Meta Title',
           type: 'string',
-          validation: (Rule) => Rule.max(60),
+          validation: Rule => Rule.max(60),
         },
         {
           name: 'metaDescription',
           title: 'Meta Description',
           type: 'text',
-          validation: (Rule) => Rule.max(160),
+          validation: Rule => Rule.max(160),
         },
         {
           name: 'ogImage',
@@ -182,7 +182,7 @@ export const blogPost = defineType({
       name: 'readTime',
       title: 'Estimated Read Time (minutes)',
       type: 'number',
-      validation: (Rule) => Rule.min(1).max(60),
+      validation: Rule => Rule.min(1).max(60),
     }),
   ],
   preview: {
@@ -192,11 +192,11 @@ export const blogPost = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const { author } = selection
+      const { author } = selection;
       return {
         ...selection,
         subtitle: author && `by ${author}`,
-      }
+      };
     },
   },
   orderings: [
@@ -211,4 +211,4 @@ export const blogPost = defineType({
       by: [{ field: 'publishedAt', direction: 'asc' }],
     },
   ],
-}) 
+});

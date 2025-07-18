@@ -42,20 +42,20 @@ A comprehensive single-page application that will showcase product information t
 
 ## 🚧 Current Status
 
-| Feature                    | Status         | Notes                              |
-| -------------------------- | -------------- | ---------------------------------- |
-| **Next.js Setup**          | ✅ Complete    | App Router, TypeScript, ESLint     |
-| **Tailwind CSS**           | ✅ Complete    | v4 configured with proper setup    |
-| **Shadcn UI**              | ✅ Basic Setup | Button component only              |
-| **Git Repository**         | ✅ Complete    | Branch protection, CI/CD workflows |
-| **GitHub Actions CI/CD**   | ✅ Complete    | Quality checks, build workflows    |
-| **Sentry Integration**     | ✅ Complete    | Error tracking configured          |
-| **Sanity CMS Integration** | ✅ Complete    | Schemas deployed, dummy data added |
+| Feature                    | Status         | Notes                                   |
+| -------------------------- | -------------- | --------------------------------------- |
+| **Next.js Setup**          | ✅ Complete    | App Router, TypeScript, ESLint          |
+| **Tailwind CSS**           | ✅ Complete    | v4 configured with proper setup         |
+| **Shadcn UI**              | ✅ Basic Setup | Button component only                   |
+| **Git Repository**         | ✅ Complete    | Branch protection, CI/CD workflows      |
+| **GitHub Actions CI/CD**   | ✅ Complete    | Quality checks, build workflows         |
+| **Sentry Integration**     | ✅ Complete    | Error tracking configured               |
+| **Sanity CMS Integration** | ✅ Complete    | Schemas deployed, dummy data added      |
 | **Splash Screen**          | ⏳ In Progress | Schema ready, needs page implementation |
 | **Landing Page**           | ⏳ In Progress | Schema ready, needs page implementation |
 | **Blog Page**              | ⏳ In Progress | Schema ready, needs page implementation |
-| **Real-time Preview**      | ⏳ Not Started | Sanity Studio configured at /studio |
-| **Production Deployment**  | ⏳ Not Started | No live site yet                   |
+| **Real-time Preview**      | ⏳ Not Started | Sanity Studio configured at /studio     |
+| **Production Deployment**  | ⏳ Not Started | No live site yet                        |
 
 ## 📚 Documentation
 
@@ -101,6 +101,7 @@ To verify the Sanity CMS integration is working:
 3. **API Test**: `http://localhost:3000/api/test-sanity`
 
 The integration includes:
+
 - ✅ **Settings** - Global site configuration
 - ✅ **Authors** - Author profiles with social links
 - ✅ **Splash Screen** - Configurable splash screen

@@ -50,11 +50,11 @@ A comprehensive single-page application that will showcase product information t
 | **Git Repository**         | ✅ Complete    | Branch protection, CI/CD workflows |
 | **GitHub Actions CI/CD**   | ✅ Complete    | Quality checks, build workflows    |
 | **Sentry Integration**     | ✅ Complete    | Error tracking configured          |
-| **Sanity CMS Integration** | ⏳ Not Started | No CMS setup or content schemas    |
-| **Splash Screen**          | ⏳ Not Started | Still showing default Next.js page |
-| **Landing Page**           | ⏳ Not Started | No custom page implementation      |
-| **Blog Page**              | ⏳ Not Started | No blog functionality              |
-| **Real-time Preview**      | ⏳ Not Started | Depends on Sanity integration      |
+| **Sanity CMS Integration** | ✅ Complete    | Schemas deployed, dummy data added |
+| **Splash Screen**          | ⏳ In Progress | Schema ready, needs page implementation |
+| **Landing Page**           | ⏳ In Progress | Schema ready, needs page implementation |
+| **Blog Page**              | ⏳ In Progress | Schema ready, needs page implementation |
+| **Real-time Preview**      | ⏳ Not Started | Sanity Studio configured at /studio |
 | **Production Deployment**  | ⏳ Not Started | No live site yet                   |
 
 ## 📚 Documentation
@@ -91,6 +91,21 @@ npm install
 # Start development server
 npm run dev
 ```
+
+### 🧪 Testing Sanity Integration
+
+To verify the Sanity CMS integration is working:
+
+1. **Visit the test page**: `http://localhost:3000/test-sanity`
+2. **Access Sanity Studio**: `http://localhost:3000/studio`
+3. **API Test**: `http://localhost:3000/api/test-sanity`
+
+The integration includes:
+- ✅ **Settings** - Global site configuration
+- ✅ **Authors** - Author profiles with social links
+- ✅ **Splash Screen** - Configurable splash screen
+- ✅ **Landing Page** - Dynamic landing page content
+- ✅ **Blog Posts** - Rich content with Portable Text
 
 **For detailed setup instructions, please visit our [Setup Guide](https://github.com/continuous-intelligence/cIV/wiki/Setup-Instructions).**
 
